@@ -3,8 +3,8 @@
 namespace App\Command;
 
 use App\Response\Command\ICommandResponse;
-use App\Response\IResponse;
 use App\Response\Command\SimpleResponse;
+use App\Response\IResponse;
 
 class TimeZoneCommand implements ICommand
 {
@@ -17,7 +17,14 @@ class TimeZoneCommand implements ICommand
 
     public function run(): ICommandResponse
     {
-        return new SimpleResponse(sprintf("Zvolené pásmo: %s",$this->timeZone));
+        try{
+            $zone = new \DateTimeZone($this->timeZone);
+            $time = (new \DateTime())->setTimezone($zone);
+        } catch (\Exception $e){
+            return new SimpleResponse("Promiň, tohle časový pásmo neznám",IResponse::HTTP_INVALID_PARAMETER);
+        }
+
+        return new SimpleResponse(sprintf("V pásmu %s je právě %s",$zone->getName(),$time->format("H:i")));
     }
 
     public static function getMask(): string

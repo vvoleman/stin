@@ -24,12 +24,12 @@ class QuestionProcessorTest extends TestCase
         $processor = new QuestionProcessor();
         $property = $obj->getProperty("commands");
         $property->setAccessible(true);
-        $property->setValue($processor,[PrivateConstructor::class]);
+        $property->setValue($processor, [PrivateConstructor::class]);
 
         $this->expectException(InitializationException::class);
         $processor->run("Tohle je privátní příkaz");
     }
-    
+
     /**
      * @dataProvider questionsProvider
      */
@@ -41,7 +41,7 @@ class QuestionProcessorTest extends TestCase
         try {
             $processor->run($question);
         } catch (UnknownCommandException $e) {
-            $str = (string) $e;
+            $str = (string)$e;
             $isOK = false;
         }
 
@@ -49,19 +49,19 @@ class QuestionProcessorTest extends TestCase
     }
 
     /**
-     * @return array<array<string,bool>>
+     * @return array
      */
     public function questionsProvider(): array
     {
         return [
-            ["Kolik je hodin?", true],
-            ["What time is it?", true],
-            ["Kolik je hodin v PST?", true],
-            ["Kolik je hodin v?", false],
-            ["Kolik je hodin v ?", false],
-            ["Kolik je hodin v ", false],
-            ["Jak se máš?", false],
-            [" ", false]
+            "Question: Kolik je hodin?" => ["Kolik je hodin?", true],
+            "Question: What time is it?" => ["What time is it?", true],
+            "Question: Kolik je hodin v PST?" => ["Kolik je hodin v PST?", true],
+            "Empty variable, no leading space"=>["Kolik je hodin v?", false],
+            "Empty variable, leading space"=>["Kolik je hodin v ?", false],
+            "Empty variable, no question mark"=>["Kolik je hodin v ", false],
+            "Unknown question"=>["Jak se máš?", false],
+            "Empty string"=>["", false]
         ];
     }
 }

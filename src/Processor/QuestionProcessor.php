@@ -55,7 +55,7 @@ class QuestionProcessor
      * Finds a command for given question
      *
      * @param string $question
-     * @return array<string,array<string,mixed>>|null
+     * @return array|null
      */
     private function findCommand(string $question): ?array
     {

@@ -10,7 +10,7 @@ class TimeCommand implements ICommand
 
     public function run(): ICommandResponse
     {
-        return new SimpleResponse(sprintf("Je %s",(new \DateTime())->format("H:i:s")));
+        return new SimpleResponse(sprintf("Je %s",(new \DateTime())->format("H:i")));
     }
 
     /**
