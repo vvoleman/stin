@@ -15,7 +15,7 @@ class TimeZoneCommandTest extends TestCase
     /**
      * @dataProvider timezoneProvider
      * @param string $timeZone
-     * @param bool $pass
+     * @param int $code
      */
     public function testTimeZones(string $timeZone, int $code)
     {
