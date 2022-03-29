@@ -1,6 +1,8 @@
 {
 	"name": "vvoleman/stin",
+	"description": "Semestral project for STIN at TUL 2021/22",
 	"type": "project",
+	"license": "proprietary",
 	"authors": [
 		{
 			"name": "vvoleman",
@@ -19,7 +21,7 @@
 	},
 	"require": {
 		"vlucas/phpdotenv": "^5.4",
-		"pecee/simple-router": "4.3.7.2"
+		"pecee/simple-router": "^4.3.7"
 	},
 	"require-dev": {
 		"symfony/var-dumper": "^6.0",
