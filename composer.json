@@ -1,28 +1,33 @@
 {
-    "name": "vvoleman/stin",
-    "type": "project",
-    "authors": [
-        {
-            "name": "vvoleman",
-            "email": "vojtech.voleman@tul.cz"
-        }
-    ],
-    "autoload": {
-        "psr-4": {
-            "App\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "App\\Tests\\": "tests/"
-        }
-    },
-    "require": {
-        "vlucas/phpdotenv": "^5.4",
-        "pecee/simple-router": "4.3.7.2"
-    },
-    "require-dev": {
-        "symfony/var-dumper": "^6.0",
-        "phpunit/phpunit": "^9.5"
-    }
+	"name": "vvoleman/stin",
+	"type": "project",
+	"authors": [
+		{
+			"name": "vvoleman",
+			"email": "vojtech.voleman@tul.cz"
+		}
+	],
+	"autoload": {
+		"psr-4": {
+			"App\\": "src/"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"App\\Tests\\": "tests/"
+		}
+	},
+	"require": {
+		"vlucas/phpdotenv": "^5.4",
+		"pecee/simple-router": "4.3.7.2"
+	},
+	"require-dev": {
+		"symfony/var-dumper": "^6.0",
+		"phpunit/phpunit": "^9.5",
+		"phpstan/phpstan": "^1.5"
+	},
+	"scripts": {
+		"phpunit-unit": "./vendor/bin/phpunit --bootstrap vendor/autoload.php --group Unit --testdox --colors=always tests/",
+		"phpstan": "./vendor/bin/phpstan analyse src tests --level 5"
+	}
 }

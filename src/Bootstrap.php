@@ -9,7 +9,7 @@ use Pecee\SimpleRouter\SimpleRouter;
 class Bootstrap
 {
 
-    public static function run()
+    public static function run(): void
     {
         // Environmental vars
         Dotenv::createImmutable(__DIR__."/../",[".env",".env.local"],true);
@@ -17,14 +17,6 @@ class Bootstrap
         // Router
         require_once dirname(__DIR__).'/routes.php';
         SimpleRouter::setDefaultNamespace('App\Controller');
-
-        try {
-            SimpleRouter::start();
-        }catch (\Exception $e){
-            echo "Nastala chyba:<br><pre>";
-            echo print_r($e);
-        }
-
     }
 
 }

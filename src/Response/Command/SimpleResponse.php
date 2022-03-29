@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Response;
+namespace App\Response\Command;
 
-class SimpleResponse implements IResponse
+use App\Response\Command\ICommandResponse;
+
+class SimpleResponse implements ICommandResponse
 {
 
     private int $code;

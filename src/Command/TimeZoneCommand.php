@@ -2,8 +2,9 @@
 
 namespace App\Command;
 
+use App\Response\Command\ICommandResponse;
 use App\Response\IResponse;
-use App\Response\SimpleResponse;
+use App\Response\Command\SimpleResponse;
 
 class TimeZoneCommand implements ICommand
 {
@@ -14,7 +15,7 @@ class TimeZoneCommand implements ICommand
         $this->timeZone = $timeZone;
     }
 
-    public function run(): IResponse
+    public function run(): ICommandResponse
     {
         return new SimpleResponse(sprintf("Zvolené pásmo: %s",$this->timeZone));
     }

@@ -2,15 +2,15 @@
 
 namespace App\Command;
 
-use App\Response\IResponse;
+use App\Response\Command\ICommandResponse;
 
 interface ICommand
 {
 
     /**
-     * @return IResponse
+     * @return ICommandResponse
      */
-    public function run(): IResponse;
+    public function run(): ICommandResponse;
 
     /**
      * @return array<string>|string
