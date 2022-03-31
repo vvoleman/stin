@@ -17,6 +17,7 @@ class Bootstrap
         // Router
         require_once dirname(__DIR__).'/routes.php';
         SimpleRouter::setDefaultNamespace('App\Controller');
+        SimpleRouter::start();
     }
 
 }
