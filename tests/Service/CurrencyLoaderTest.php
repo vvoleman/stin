@@ -2,7 +2,7 @@
 
 namespace App\Tests\Service;
 
-use App\Service\CurrencyLoader;
+use App\Service\Currency\CurrencyLoader;
 use PHPUnit\Framework\TestCase;
 
 class CurrencyLoaderTest extends TestCase

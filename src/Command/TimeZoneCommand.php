@@ -6,7 +6,7 @@ use App\Response\Command\ICommandResponse;
 use App\Response\Command\SimpleResponse;
 use App\Response\IResponse;
 
-class TimeZoneCommand implements ICommand
+class TimeZoneCommand extends Command
 {
 
     private string $timeZone;
@@ -29,7 +29,7 @@ class TimeZoneCommand implements ICommand
 
     public static function getMask(): string
     {
-        return "Kolik je hodin v __timeZone__?";
+        return "[Kolik] jee [hodin] [v __timeZone__]?";
     }
 
 

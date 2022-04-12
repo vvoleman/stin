@@ -5,7 +5,7 @@ namespace App\Command;
 use App\Response\Command\ICommandResponse;
 use App\Response\Command\SimpleResponse;
 
-class TimeCommand implements ICommand
+class TimeCommand extends Command
 {
 
     public function run(): ICommandResponse
@@ -18,6 +18,6 @@ class TimeCommand implements ICommand
      */
     public static function getMask(): array
     {
-        return ["Kolik je hodin?","What time is it?"];
+        return ["[Kolik] je [hodin]a?","What time is it?"];
     }
 }

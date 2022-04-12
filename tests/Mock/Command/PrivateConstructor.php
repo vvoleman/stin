@@ -2,10 +2,11 @@
 
 namespace App\Tests\Mock\Command;
 
+use App\Command\Command;
 use App\Response\Command\ICommandResponse;
 use App\Response\Command\SimpleResponse;
 
-class PrivateConstructor implements \App\Command\ICommand
+class PrivateConstructor extends Command
 {
 
     private function __construct() { }

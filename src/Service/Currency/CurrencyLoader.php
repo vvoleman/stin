@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service;
+namespace App\Service\Currency;
 
 use App\Exception\Currency\CurrencyRequestException;
 use App\Exception\InvalidDatetimeException;
@@ -15,7 +15,7 @@ use Symfony\Component\Finder\SplFileInfo;
 
 class CurrencyLoader
 {
-    public const PATH = __DIR__ . "/../../storage/currency";
+    public const PATH = __DIR__ . "/../../../storage/currency";
     private const API_BASE = "https://data.kurzy.cz/json/meny/";
     private const BANK = 6;
 
@@ -76,7 +76,6 @@ class CurrencyLoader
 
         // Path to a file
         $name = sprintf("%s/%s.json",self::PATH,$date->format("Y-m-d"));
-
         // There is already a file for this day
         if(file_exists($name)){
             return $this->loadFile($name);
@@ -105,6 +104,7 @@ class CurrencyLoader
 
         // Save to file
         $json = json_decode(($response->getBody()),true);
+
         $file = fopen($name,"w+");
         $status = fwrite($file,json_encode($json));
         fclose($file);
