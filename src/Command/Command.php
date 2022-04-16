@@ -7,29 +7,42 @@ use App\Response\Command\ICommandResponse;
 abstract class Command
 {
 
+	/** @var string[]  */
+	public static array $mandatoryParts = [];
+
+	/** @var string[]|string  */
+	public static array|string $regexMasks;
+
     /**
      * @return ICommandResponse
      */
     public abstract function run(): ICommandResponse;
 
     /**
-     * @return array<string>|string
+     * @return string[]|string
      */
     public abstract static function getMask(): array|string;
 
     public static function getRegExpMasks(): array|string
     {
-        $masks = static::getMask();
+		if(isset(static::$regexMasks)){
+			return static::$regexMasks;
+		}
+
+		$masks = static::getMask();
         if (!is_array($masks)) {
             $masks = [$masks];
         }
 
         $result = [];
         foreach ($masks as $item) {
-            $pass = self::replaceMandatoryParts($item);
-            $parameters = self::replaceVariables($pass);
-            $result[] = sprintf("/%s/i",$parameters);
+            $mandatory = static::replaceMandatoryParts($item);
+            $withVariables = static::replaceVariables($mandatory);
+            $result[] = sprintf("/%s/i",$withVariables);
         }
+
+		static::$regexMasks = $result;
+
         return $result;
     }
 
@@ -60,6 +73,7 @@ abstract class Command
         if (preg_match_all($rule, $s, $attr)) {
             foreach ($attr[0] as $var) {
                 $name = preg_replace("/[\[\]]/", "", $var);
+				static::$mandatoryParts[] = $name;
                 $parts[] = sprintf("(?=.*%s)", $name);
             }
         }else{

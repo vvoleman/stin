@@ -5,6 +5,7 @@ namespace App\Processor;
 use App\Command\Command;
 use App\Exception\InitializationException;
 use App\Exception\UnknownCommandException;
+use App\Response\Command\ICommandResponse;
 
 class QuestionProcessor
 {
@@ -24,14 +25,14 @@ class QuestionProcessor
      * @throws UnknownCommandException Command not found
      * @throws InitializationException Command cannot be created
      */
-    public function run(string $question): void
+    public function run(string $question): ICommandResponse
     {
         // Loads question into better format
         $this->processCommands();
 
         // Finds command as array|null
         $command = $this->findCommand($question);
-        dump($command);
+
         // If command is not found
         if (!$command) {
             throw new UnknownCommandException(sprintf("Unable to find command for question '%s'", $question));
@@ -39,6 +40,8 @@ class QuestionProcessor
 
         // Creates instance of command
         $command = $this->initCommand($command["className"], $command["variables"]);
+
+		return $command->run();
     }
 
     /**

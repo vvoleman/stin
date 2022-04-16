@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 class CurrencyLoaderTest extends TestCase
 {
 
-    public function testLoadCurrencyListForDate()
+    /*public function testLoadCurrencyListForDate()
     {
     }
 
@@ -18,5 +18,5 @@ class CurrencyLoaderTest extends TestCase
 
     public function testGetLastList()
     {
-    }
+    }*/
 }

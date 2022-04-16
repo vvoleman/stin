@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Service\Currency\Currency\DataSource;
+namespace App\Service\Currency\DataSource;
+
+use App\Service\Currency\DataSource\Currency;
 
 class CurrencyContainer
 {

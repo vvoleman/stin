@@ -39,12 +39,13 @@ class QuestionProcessorTest extends TestCase
 
         $isOK = true;
         try {
-            $processor->run($question);
+            $response = $processor->run($question);
+			if($response->getCode() !== $response::HTTP_SUCCESS){
+				$isOK = false;
+			}
         } catch (UnknownCommandException $e) {
-            $str = (string)$e;
             $isOK = false;
         }
-
         $this->assertEquals($pass, $isOK);
     }
 
@@ -57,9 +58,10 @@ class QuestionProcessorTest extends TestCase
             "Question: Kolik je hodin?" => ["Kolik je hodin?", true],
             "Question: What time is it?" => ["What time is it?", true],
             "Question: Kolik je hodin v PST?" => ["Kolik je hodin v PST?", true],
-            "Empty variable, no leading space"=>["Kolik je hodin v?", false],
-            "Empty variable, leading space"=>["Kolik je hodin v ?", false],
-            "Empty variable, no question mark"=>["Kolik je hodin v ", false],
+            "Empty variable, no leading space, passable"=>["Kolik je hodin v?", true],
+            "Empty variable, leading space, passable"=>["Kolik je hodin v ?", true],
+            "Empty variable, no question mar, passablek"=>["Kolik je hodin v ", true],
+            "Invalid timezone"=>["Kolik je hodin v Liberci", false],
             "Unknown question"=>["Jak se máš?", false],
             "Empty string"=>["", false]
         ];

@@ -8,6 +8,12 @@ use App\Response\Command\SimpleResponse;
 class TimeCommand extends Command
 {
 
+	/** @var string[]  */
+	public static array $mandatoryParts = [];
+
+	/** @var string[]|string  */
+	public static array|string $regexMasks;
+
     public function run(): ICommandResponse
     {
         return new SimpleResponse(sprintf("Je %s",(new \DateTime())->format("H:i")));
