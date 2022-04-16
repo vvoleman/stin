@@ -18,12 +18,12 @@ Semestrální práce pro STIN 2021/22
 Aplikace umožňuje uživateli pokládat otázky a na předem připravené otázky získat odpovědi. Lze tedy aplikaci použít pro FAQ či složitější otázky, které například pro odpověd potřebují zpracovat množství dat.
 
 ## Technické podmínky
-###Zabezpečení: 
-Token v URL adrese
-###Jazyky: 
-PHP >=8.0
-###Další
-Stabilní internetové připojení
+- Zabezpečení:
+  - Token v URL adrese
+- Jazyky: 
+  - PHP >=8.0
+- Další
+  - Stabilní internetové připojení
 
 ## Specifikace požadavků
 ### Uživatelské požadavky
