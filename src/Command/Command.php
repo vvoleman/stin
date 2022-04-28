@@ -36,8 +36,8 @@ abstract class Command
 
         $result = [];
         foreach ($masks as $item) {
-            $mandatory = static::replaceMandatoryParts($item);
-            $withVariables = static::replaceVariables($mandatory);
+            $mandatory = self::replaceMandatoryParts($item);
+            $withVariables = self::replaceVariables($mandatory);
             $result[] = sprintf("/%s/i",$withVariables);
         }
 
@@ -66,7 +66,7 @@ abstract class Command
         return $s;
     }
 
-    private static function replaceMandatoryParts(string $s): string|null
+    private static function replaceMandatoryParts(string $s): string
     {
         $rule = "/\[([a-zA-Z0-9 _]+)+\]/i";
         $parts = [];

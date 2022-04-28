@@ -13,7 +13,7 @@ class QuestionProcessor
     /** @var array<string> */
     private array $commands;
 
-    /** @var array<string,array> */
+    /** @var array<string,string> */
     private array $innerCommands;
 
     public function __construct()
