@@ -2,11 +2,10 @@
 
 namespace App\Processor;
 
-use App\Command\ICommand;
-use App\Command\TimeCommand;
-use App\Command\TimeZoneCommand;
+use App\Command\Command;
 use App\Exception\InitializationException;
 use App\Exception\UnknownCommandException;
+use App\Response\Command\ICommandResponse;
 
 class QuestionProcessor
 {
@@ -26,7 +25,7 @@ class QuestionProcessor
      * @throws UnknownCommandException Command not found
      * @throws InitializationException Command cannot be created
      */
-    public function run(string $question): void
+    public function run(string $question): ICommandResponse
     {
         // Loads question into better format
         $this->processCommands();
@@ -41,6 +40,8 @@ class QuestionProcessor
 
         // Creates instance of command
         $command = $this->initCommand($command["className"], $command["variables"]);
+
+		return $command->run();
     }
 
     /**
@@ -60,42 +61,22 @@ class QuestionProcessor
     private function findCommand(string $question): ?array
     {
         // Loops every registered command
-        foreach ($this->innerCommands as $key => $className) {
+        foreach ($this->innerCommands as $key => $data) {
             // Checks if question matches current command
-            if (preg_match_all($this->escapeRegExString($key), $question, $params)) {
+            if (preg_match($key, $question,$params)) {
                 // Filters RegExp groups
                 $variables = array_filter($params, function ($key) {
                     return is_string($key);
                 }, ARRAY_FILTER_USE_KEY);
 
+                // Return key-value, simplify variables
                 return [
-                    "className" => $className,
-                    "variables" => array_map(function ($x) { return $x[0]; }, $variables)
+                    "className" => $data,
+                    "variables" => array_map(function ($x) { return $x; }, $variables)
                 ];
             }
         }
         return null;
-    }
-
-    /**
-     * Escapes string and replaces variables with regex groups
-     *
-     * @param string $s
-     * @return string
-     */
-    private function escapeRegExString(string $s): string
-    {
-        $escaped = preg_quote($s);
-        $rule = "/__([a-zA-Z0-9]+)+__/i";
-
-        if (preg_match_all($rule, $escaped, $attr)) {
-            foreach ($attr[0] as $var) {
-                $name = str_replace("__", "", $var);
-                $escaped = str_replace($var, sprintf("(?<%s>[a-zA-Z0-9\- ]+)+", $name), $escaped);
-            }
-        }
-
-        return sprintf("/%s/i", $escaped);
     }
 
     /**
@@ -105,10 +86,10 @@ class QuestionProcessor
     {
         $inner = [];
         foreach ($this->commands as $command) {
-            // If class exists and implements ICommand
-            if (class_exists($command) && is_subclass_of($command, ICommand::class)) {
+            // If class exists and extends Command
+            if (class_exists($command) && is_subclass_of($command, Command::class)) {
                 // Get all command variants and add them to inner array
-                $masks = $command::getMask();
+                $masks = $command::getRegExpMasks();
                 $masks = is_array($masks) ? $masks : [$masks];
                 foreach ($masks as $mask) {
                     $inner[$mask] = $command;
@@ -122,7 +103,7 @@ class QuestionProcessor
      * @param array<string> $variables
      * @throws InitializationException
      */
-    private function initCommand(string $className, array $variables): ICommand
+    private function initCommand(string $className, array $variables): Command
     {
         try {
             $reflection = new \ReflectionClass($className);
