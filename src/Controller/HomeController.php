@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Processor\QuestionProcessor;
-use App\Service\Currency\CurrencyLoader;
 use App\Util\TimetrackerTrait;
 
 class HomeController
@@ -14,10 +13,10 @@ class HomeController
     public function index(): void
     {
         $processor = new QuestionProcessor();
-        dump($processor->run("Kolika hodina v CET a taaak?"));
+        dump($processor->run("Jaký je kurz EUR?"));
 
-        /*$loader = new CurrencyLoader();
-        $loader->loadCurrencyListForDate();*/
-    }
+//        $loader = new CurrencyLoader(new CnbSource());
+//		dd($loader->loadCurrenciesForDate());
+	}
 
 }

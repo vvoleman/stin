@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Service\Currency\DataSource;
+namespace App\Service\Currency;
 
-use App\Service\Currency\DataSource\Currency;
+use App\Service\Currency\Currency;
 
 class CurrencyContainer
 {
@@ -42,4 +42,18 @@ class CurrencyContainer
     public function size(): int{
         return sizeof($this->currencies);
     }
+
+	/**
+	 * @return array<array<string,mixed>>
+	 */
+	public function toArray(): array
+	{
+		$currencies = [];
+
+		foreach ($this->currencies as $currency) {
+			$currencies[] = $currency->toArray();
+		}
+
+		return $currencies;
+	}
 }

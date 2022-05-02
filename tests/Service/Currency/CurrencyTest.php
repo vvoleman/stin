@@ -1,19 +1,16 @@
 <?php
 
-namespace App\Tests\Service\Currency\DataSource;
+namespace App\Tests\Service\Currency;
 
-use App\Service\Currency\DataSource\Currency;
-use App\Service\Currency\DataSource\CurrencyContainer;
+use App\Exception\Currency\CurrencyException;
+use App\Service\Currency\Currency;
+use App\Service\Currency\CurrencyContainer;
 use Dotenv\Dotenv;
+use Iterator;
 use PHPUnit\Framework\TestCase;
 
-class CurrencyContainerTest extends TestCase
+class CurrencyTest extends TestCase
 {
-
-    public static function setUpBeforeClass(): void{
-        $dotenv = Dotenv::createImmutable(__DIR__."/../../../../",[".env",".env.local"],true);
-        $dotenv->safeLoad();
-    }
 
     /**
      * @dataProvider addProvider
@@ -51,4 +48,56 @@ class CurrencyContainerTest extends TestCase
             "Čokoláda"=>[new Currency("Čokoláda", "YUM", 1, 10, $date->modify("-5 days"))],
         ];
     }
+
+	/**
+	 * @param array $array
+	 * @param bool $pass
+	 * @dataProvider makeFromArrayProvider
+	 */
+	public function testMakeFromArray(array $array, bool $pass): void
+	{
+		$isOk = true;
+		try{
+			$currency = Currency::makeFromArray($array);
+		} catch (CurrencyException $e){
+			$isOk = false;
+		}
+
+		$this->assertEquals($pass, $isOk);
+	}
+
+	public function makeFromArrayProvider(): Iterator
+	{
+		$date = new \DateTime();
+		$arr = [
+			'name' => 'a',
+			'code' => 'a',
+			'amount' => 1,
+			'exchangeRate' => 1,
+			'dateTime' => $date->format('Y-m-d')
+		];
+
+		yield [$arr, true];
+
+		$arr = [
+			'name' => 'a',
+			'code' => 'a',
+			'amount' => 1,
+			'exchangeRate' => 1,
+			'dateTime' => "abcd"
+		];
+
+		yield [$arr, false];
+
+		$arr = [
+			'ndame' => 'a',
+			'de' => 'a',
+			'amodunt' => 1,
+			'exchadnge' => 1,
+			'datedTime' => $date->format('Y-m-d')
+		];
+
+		yield [$arr, false];
+
+	}
 }

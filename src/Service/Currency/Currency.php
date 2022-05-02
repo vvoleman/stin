@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Service\Currency\DataSource;
+namespace App\Service\Currency;
 
+use App\Exception\Currency\CurrencyException;
 use DateTime;
 
 class Currency
@@ -63,7 +64,7 @@ class Currency
             $this->name,
             $this->code,
             round($this->exchangeRate, 2),
-            $this->dateTime->format($_ENV["DATETIME_FORMAT_VISIBLE"])
+            $this->dateTime->format('d. m. Y')
         );
     }
 
@@ -74,6 +75,41 @@ class Currency
     {
         return $this->dateTime;
     }
+
+	/**
+	 * @return array<string,mixed>
+	 */
+	public function toArray(): array
+	{
+		return [
+			'name' => $this->name,
+			'code' => $this->code,
+			'amount' => $this->amount,
+			'exchangeRate' => $this->exchangeRate,
+			'dateTime' => $this->dateTime->format('Y-m-d H:i:s')
+		];
+	}
+
+
+	/**
+	 * Creates instance of currency base on key-value array
+	 *
+	 * @throws CurrencyException
+	 */
+	public static function makeFromArray(array $data): Currency
+	{
+		try {
+			return new Currency(
+				name: $data['name'],
+				code: $data['code'],
+				amount: $data['amount'],
+				exchangeRate: floatval($data['exchangeRate']),
+				dateTime: new DateTime($data['dateTime'])
+			);
+		} catch (\Exception $e){
+			throw new CurrencyException($e);
+		}
+	}
 
 
 }

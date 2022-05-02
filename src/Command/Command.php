@@ -25,9 +25,9 @@ abstract class Command
 
     public static function getRegExpMasks(): array|string
     {
-		if(isset(static::$regexMasks)){
-			return static::$regexMasks;
-		}
+//		if(isset(static::$regexMasks)){
+//			return static::$regexMasks;
+//		}
 
 		$masks = static::getMask();
         if (!is_array($masks)) {
@@ -36,8 +36,8 @@ abstract class Command
 
         $result = [];
         foreach ($masks as $item) {
-            $mandatory = self::replaceMandatoryParts($item);
-            $withVariables = self::replaceVariables($mandatory);
+            $mandatory = static::replaceMandatoryParts($item); /** @phpstan-ignore-line */
+            $withVariables = static::replaceVariables($mandatory); /** @phpstan-ignore-line */
             $result[] = sprintf("/%s/i",$withVariables);
         }
 

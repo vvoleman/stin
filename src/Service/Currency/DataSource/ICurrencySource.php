@@ -2,18 +2,17 @@
 
 namespace App\Service\Currency\DataSource;
 
+use App\Service\Currency\CurrencyContainer;
+use DateTimeImmutable;
+use GuzzleHttp\Psr7\Request;
+use Psr\Http\Message\ResponseInterface;
+
 interface ICurrencySource
 {
 
-    public function loadAllFiles(): array;
+	public function responseToContainer(ResponseInterface $response): CurrencyContainer;
 
-    /**
-     * @param \DateTime|null $date
-     * @param bool $shouldSave
-     */
-    public function readDate(\DateTime $date = null, bool $shouldSave = true);
-
-    public function saveDate(\DateTime $date, array $data): \SplFileInfo;
+	public function prepareRequest(DateTimeImmutable $dateTime): Request;
 
     public static function getFolder(): string;
 
