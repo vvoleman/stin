@@ -1,6 +1,7 @@
 on:
     push:
         branches:
+            - deploy_test
             - main
 jobs:
     heroku-deploy:

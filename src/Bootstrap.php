@@ -4,7 +4,6 @@ namespace App;
 
 use App\Exception\DIException;
 use Latte\Engine;
-use App\Processor\QuestionProcessor;
 use Dotenv\Dotenv;
 use Pecee\SimpleRouter\SimpleRouter;
 
@@ -31,7 +30,7 @@ class Bootstrap
 		self::$container[$latte::class] = $latte;
 
         SimpleRouter::start();
-    }
+	}
 
 	/**
 	 * @throws DIException
