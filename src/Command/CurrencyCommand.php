@@ -7,6 +7,7 @@ use App\Response\Command\SimpleResponse;
 use App\Response\IResponse;
 use App\Service\Currency\CurrencyLoader;
 use App\Service\Currency\DataSource\CnbSource;
+use JetBrains\PhpStorm\ArrayShape;
 
 class CurrencyCommand extends Command
 {
@@ -28,11 +29,23 @@ class CurrencyCommand extends Command
 		$currency = $container->get($this->currency);
 
 		if ($currency) {
-			return new SimpleResponse(sprintf('Kurz pro %s je %.2f',$currency->getName(),$currency->getExchangeRate()));
+			return new SimpleResponse(sprintf('Kurz pro %s je %.2f Kč',$currency->getName(),$currency->getExchangeRate()));
 		} else {
 			return new SimpleResponse(sprintf('Nenalezl jsem měnu %s.',$this->currency),IResponse::HTTP_NOT_FOUND);
 		}
 
+	}
+
+	#[ArrayShape(['name' => "string", 'description' => "string", 'examples' => "string[]"])]
+	public function getHelp(): array
+	{
+		return [
+			'name' => 'Měna',
+			'description' => 'Umožňuje získat informace o měnách.',
+			'examples' => [
+				'Jaký je kurz EUR?'
+			]
+		];
 	}
 
 	/**

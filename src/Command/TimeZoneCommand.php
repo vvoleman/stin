@@ -5,6 +5,7 @@ namespace App\Command;
 use App\Response\Command\ICommandResponse;
 use App\Response\Command\SimpleResponse;
 use App\Response\IResponse;
+use JetBrains\PhpStorm\ArrayShape;
 
 class TimeZoneCommand extends Command
 {
@@ -43,4 +44,14 @@ class TimeZoneCommand extends Command
     }
 
 
+	#[ArrayShape(['name' => "string", 'description' => "string", 'examples' => "string[]"])] public function getHelp(): array
+	{
+		return [
+			'name' => 'Časová pásma',
+			'description' => 'Vrací čas v daném časovém pásmu.',
+			'examples' => [
+				'Kolik je hodin v PST?',
+			]
+		];
+	}
 }

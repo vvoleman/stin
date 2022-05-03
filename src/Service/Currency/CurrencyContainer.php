@@ -26,7 +26,7 @@ class CurrencyContainer
      * @param Currency $currency
      */
     public function add(Currency $currency){
-        $this->currencies[$currency->getCode()] = $currency;
+        $this->currencies[strtoupper($currency->getCode())] = $currency;
     }
 
     /**
@@ -36,7 +36,7 @@ class CurrencyContainer
      * @return Currency|null
      */
     public function get(string $code): ?Currency{
-        return $this->currencies[$code] ?? null;
+        return $this->currencies[strtoupper($code)] ?? null;
     }
 
     public function size(): int{

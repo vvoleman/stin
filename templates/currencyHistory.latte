@@ -1,0 +1,18 @@
+{varType App\Service\Currency\Currency $mainCurrency}
+{varType array $currencies}
+
+<table style="text-align: center">
+    <thead>
+        <tr>
+            <th>Datum</th>
+            <th>Kurz</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr n:foreach="$currencies as $currency">
+            {varType App\Service\Currency\Currency $currency}
+            <td>{$currency->getDateTime()->format('d. m. Y')}</td>
+            <td>{$currency->getExchangeRate()|round:2} Kč</td>
+        </tr>
+    </tbody>
+</table>
