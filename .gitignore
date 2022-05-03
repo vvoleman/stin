@@ -1,4 +1,6 @@
 /vendor/
+/temp/
 /.idea/
 .env
 /.phpunit.result.cache
+/storage/curency/

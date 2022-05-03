@@ -2,7 +2,9 @@
 
 namespace App\Response\Command;
 
-interface ICommandResponse extends \App\Response\IResponse
+use App\Response\IResponse;
+
+interface ICommandResponse extends IResponse
 {
     public function getContent(): string;
 
