@@ -3,7 +3,6 @@
 namespace App\Command;
 
 use App\Response\Command\ICommandResponse;
-use JetBrains\PhpStorm\ArrayShape;
 
 abstract class Command
 {
@@ -22,7 +21,6 @@ abstract class Command
 	/**
 	 * @return array<string,mixed>
 	 */
-	#[ArrayShape(['name' => "string", 'description' => "string", 'examples' => "string[]"])]
 	public abstract function getHelp(): array;
 
 

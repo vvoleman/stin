@@ -13,7 +13,6 @@ use App\Response\Command\SimpleResponse;
 use App\Response\IResponse;
 use App\Service\Currency\CurrencyLoader;
 use App\Service\Currency\DataSource\CnbSource;
-use JetBrains\PhpStorm\ArrayShape;
 use Latte\Engine;
 
 class CurrencyHistoryCommand extends Command
@@ -67,7 +66,7 @@ class CurrencyHistoryCommand extends Command
 	/**
 	 * @inheritDoc
 	 */
-	#[ArrayShape(['name' => "string", 'description' => "string", 'examples' => "string[]"])] public function getHelp(): array
+	public function getHelp(): array
 	{
 		return [
 			'name' => 'Historie měny',

@@ -7,7 +7,6 @@ use App\Response\Command\SimpleResponse;
 use App\Response\IResponse;
 use App\Service\Currency\CurrencyLoader;
 use App\Service\Currency\DataSource\CnbSource;
-use JetBrains\PhpStorm\ArrayShape;
 
 class CurrencyCommand extends Command
 {
@@ -36,7 +35,6 @@ class CurrencyCommand extends Command
 
 	}
 
-	#[ArrayShape(['name' => "string", 'description' => "string", 'examples' => "string[]"])]
 	public function getHelp(): array
 	{
 		return [

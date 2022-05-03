@@ -5,7 +5,6 @@ namespace App\Command;
 
 use App\Response\Command\ICommandResponse;
 use App\Response\Command\SimpleResponse;
-use JetBrains\PhpStorm\ArrayShape;
 
 class NameCommand extends Command
 {
@@ -31,8 +30,6 @@ class NameCommand extends Command
 		return ['[jméno]','[jmen]'];
 	}
 
-
-	#[ArrayShape(['name' => "string", 'description' => "string", 'examples' => "string[]"])]
 	public function getHelp(): array
 	{
 		return [
