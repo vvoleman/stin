@@ -4,8 +4,6 @@ namespace App;
 
 use App\Exception\DIException;
 use Latte\Engine;
-use Tracy\Debugger;
-use App\Processor\QuestionProcessor;
 use Dotenv\Dotenv;
 use Pecee\SimpleRouter\SimpleRouter;
 
@@ -17,10 +15,6 @@ class Bootstrap
 
     public static function run(): void
     {
-
-
-        Debugger::enable(Debugger::DEVELOPMENT);
-
         // Environmental vars
         $dotenv = Dotenv::createImmutable(__DIR__."/../",[".env",".env.local"],true);
         $dotenv->safeLoad();
@@ -36,7 +30,7 @@ class Bootstrap
 		self::$container[$latte::class] = $latte;
 
         SimpleRouter::start();
-    }
+	}
 
 	/**
 	 * @throws DIException
