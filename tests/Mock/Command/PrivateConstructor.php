@@ -5,6 +5,7 @@ namespace App\Tests\Mock\Command;
 use App\Command\Command;
 use App\Response\Command\ICommandResponse;
 use App\Response\Command\SimpleResponse;
+use JetBrains\PhpStorm\ArrayShape;
 
 class PrivateConstructor extends Command
 {
@@ -26,4 +27,9 @@ class PrivateConstructor extends Command
     {
         return "Tohle je privátní příkaz";
     }
+
+	public function getHelp(): array
+	{
+		return [];
+	}
 }

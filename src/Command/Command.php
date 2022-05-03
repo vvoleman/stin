@@ -18,33 +18,38 @@ abstract class Command
      */
     public abstract function run(): ICommandResponse;
 
-    /**
-     * @return string[]|string
-     */
-    public abstract static function getMask(): array|string;
+	/**
+	 * @return array<string,mixed>
+	 */
+	public abstract function getHelp(): array;
 
-    public static function getRegExpMasks(): array|string
-    {
-//		if(isset(static::$regexMasks)){
-//			return static::$regexMasks;
-//		}
+
+		// Service
+
+	public static function getRegExpMasks(): array|string
+	{
 
 		$masks = static::getMask();
-        if (!is_array($masks)) {
-            $masks = [$masks];
-        }
+		if (!is_array($masks)) {
+			$masks = [$masks];
+		}
 
-        $result = [];
-        foreach ($masks as $item) {
-            $mandatory = static::replaceMandatoryParts($item); /** @phpstan-ignore-line */
-            $withVariables = static::replaceVariables($mandatory); /** @phpstan-ignore-line */
-            $result[] = sprintf("/%s/i",$withVariables);
-        }
+		$result = [];
+		foreach ($masks as $item) {
+			$mandatory = static::replaceMandatoryParts($item); /** @phpstan-ignore-line */
+			$withVariables = static::replaceVariables($mandatory); /** @phpstan-ignore-line */
+			$result[] = sprintf("/%s/i",$withVariables);
+		}
 
 		static::$regexMasks = $result;
 
-        return $result;
-    }
+		return $result;
+	}
+
+	/**
+     * @return string[]|string
+     */
+    public abstract static function getMask(): array|string;
 
     /**
      * Converts human-readable variable syntax to regex
@@ -68,7 +73,7 @@ abstract class Command
 
     private static function replaceMandatoryParts(string $s): string
     {
-        $rule = "/\[([a-zA-Z0-9 _]+)+\]/i";
+        $rule = "/\[([a-žA-Ž0-9 _]+)+\]/i";
         $parts = [];
         if (preg_match_all($rule, $s, $attr)) {
             foreach ($attr[0] as $var) {

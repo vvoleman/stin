@@ -43,4 +43,14 @@ class TimeZoneCommand extends Command
     }
 
 
+	public function getHelp(): array
+	{
+		return [
+			'name' => 'Časová pásma',
+			'description' => 'Vrací čas v daném časovém pásmu.',
+			'examples' => [
+				'Kolik je hodin v PST?',
+			]
+		];
+	}
 }

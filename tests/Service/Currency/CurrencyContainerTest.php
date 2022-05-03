@@ -53,6 +53,7 @@ class CurrencyContainerTest extends TestCase
 
 		yield [$container, 'a', true];
 		yield [$container, 'b', true];
+		yield [$container, 'A', true];
 		yield [$container, 'c', false];
 		yield [$container, 'd', false];
 	}

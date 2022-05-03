@@ -26,4 +26,15 @@ class TimeCommand extends Command
     {
         return ["[Kolik] je [hodin]a?","What time is it?"];
     }
+
+	public function getHelp(): array
+	{
+		return [
+			'name' => 'Čas',
+			'description' => 'Vrací aktuální serverový čas.',
+			'examples' => [
+				'Kolik je hodin?'
+			]
+		];
+	}
 }

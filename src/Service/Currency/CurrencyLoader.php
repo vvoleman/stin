@@ -104,7 +104,7 @@ class CurrencyLoader
 	 *
 	 * @return array<string,SplFileInfo>
 	 */
-	private function getAllFiles(): array
+	public function getAllFiles(): array
 	{
 		$finder = new Finder();
 
@@ -173,7 +173,7 @@ class CurrencyLoader
 	 * @throws IOException
 	 * @throws CurrencyContainerException
 	 */
-	private function loadCurrencyContainer(string $path): CurrencyContainer
+	public function loadCurrencyContainer(string $path): CurrencyContainer
 	{
 		$content = file_get_contents($path);
 
