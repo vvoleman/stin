@@ -28,7 +28,7 @@ class PrivateConstructor extends Command
         return "Tohle je privátní příkaz";
     }
 
-	#[ArrayShape(['name' => "string", 'description' => "string", 'examples' => "string[]"])] public function getHelp(): array
+	public function getHelp(): array
 	{
 		return [];
 	}
