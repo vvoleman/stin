@@ -36,7 +36,7 @@ class CurrencyHistoryCommandTest extends TestCase
 	}
 
 	/**
-	 * @return \string[][]
+	 * @return array<string,mixed>
 	 * @covers \App\Command\CurrencyHistoryCommand
 	 */
 	public function runProvider(): array

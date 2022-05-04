@@ -104,9 +104,6 @@ class CurrencyContainerFactory
 		}
 
 		$dateTime = $records[count($records) - 1];
-		if(!$dateTime){
-			return null;
-		}
 
 		return $this->storage->get($dateTime);
 

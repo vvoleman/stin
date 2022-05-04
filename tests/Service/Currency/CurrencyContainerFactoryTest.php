@@ -60,13 +60,11 @@ class CurrencyContainerFactoryTest extends TestCase
 	/**
 	 * @param CurrencyContainerFactory $factory
 	 * @param string $date
-	 * @param bool $isNull
-	 * @param bool $isThrown
 	 * @throws CurrencyContainerException
 	 * @throws InvalidDatetimeException
 	 * @dataProvider containerInStorageProvider
-	 * @covers \App\Service\Currency\CurrencyContainerFactory
-	 * @covers \App\Service\Currency\CurrencyContainer
+	 * @covers       \App\Service\Currency\CurrencyContainerFactory
+	 * @covers       \App\Service\Currency\CurrencyContainer
 	 */
 	public function testContainerInStorage(
 		CurrencyContainerFactory $factory,
@@ -94,7 +92,8 @@ class CurrencyContainerFactoryTest extends TestCase
 	 * @param string $date
 	 * @param bool $useOlder
 	 * @param bool $isNull
-	 * @param bool $isThrown
+	 * @param bool $isThrownRetriever
+	 * @param string|null $isThrownStorage
 	 * @throws CurrencyContainerException
 	 * @throws InvalidDatetimeException
 	 * @dataProvider retrieveErrorProvider

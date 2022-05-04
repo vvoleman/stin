@@ -19,7 +19,7 @@ class ClientTest extends TestCase
 	 */
 	public function testSend()
 	{
-		$request = new Request('AAAUWUFL','AKSDWQOPKFLŮSDFS',['fdfds']);
+		$request = new Request('AAAUWUFL','AKSDWQOPKFLŮSDFS');
 
 		$client = new Client();
 

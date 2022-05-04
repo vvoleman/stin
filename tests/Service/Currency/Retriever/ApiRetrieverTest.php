@@ -17,11 +17,8 @@ use PHPUnit\Framework\TestCase;
  */
 class ApiRetrieverTest extends TestCase
 {
-
-	private const FORMAT = 'Y-m-d H:i';
-
 	private ICurrencySource $source;
-	private IClient $client;
+	private Client $client;
 
 	/**
 	 * @param DateTimeImmutable $dateTime
