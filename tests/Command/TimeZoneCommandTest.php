@@ -16,6 +16,8 @@ class TimeZoneCommandTest extends TestCase
      * @dataProvider timezoneProvider
      * @param string $timeZone
      * @param int $code
+	 * @covers \App\Command\TimeZoneCommand
+	 * @covers \App\Response\Command\SimpleResponse
      */
     public function testTimeZones(string $timeZone, int $code)
     {
@@ -38,5 +40,12 @@ class TimeZoneCommandTest extends TestCase
             "Empty string"=>["",IResponse::HTTP_INVALID_PARAMETER]
         ];
     }
+
+	/**
+	 * @covers \App\Command\TimeZoneCommand
+	 */
+	public function testHelp(): void {
+		$this->assertGreaterThan(0, count(TimeZoneCommand::getHelp()));
+	}
     
 }

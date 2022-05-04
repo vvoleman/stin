@@ -1,0 +1,11 @@
+{varType array $helps}
+<h3>Příkazy:</h3>
+<hr>
+<div n:foreach="$helps as $help">
+    <b>{$help['name']}</b>
+    <p>{$help['description']}</p>
+    <span>Ukázka:</span>
+    <ul n:if="count($help['examples']) > 0">
+        <li n:foreach="$help['examples'] as $example">{$example}</li>
+    </ul>
+</div>
