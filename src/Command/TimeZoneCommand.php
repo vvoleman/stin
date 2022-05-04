@@ -43,7 +43,7 @@ class TimeZoneCommand extends Command
     }
 
 
-	public function getHelp(): array
+	public static function getHelp(): array
 	{
 		return [
 			'name' => 'Časová pásma',

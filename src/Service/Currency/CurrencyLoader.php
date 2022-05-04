@@ -79,7 +79,6 @@ class CurrencyLoader
 		// Return retrieved data
 		return $container;
 	}
-
 	/**
 	 * Returns last list from local storage
 	 *
