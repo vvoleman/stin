@@ -7,12 +7,9 @@ use App\Exception\InitializationException;
 use App\Exception\UnknownCommandException;
 use App\Processor\QuestionProcessor;
 use App\Service\API\TokenVerifier;
-use App\Util\TimetrackerTrait;
 
 class HomeController
 {
-
-	use TimetrackerTrait;
 
 	public function index(): void
 	{

@@ -5,16 +5,20 @@ namespace App\Tests\Service\Currency;
 use App\Exception\Currency\CurrencyException;
 use App\Service\Currency\Currency;
 use App\Service\Currency\CurrencyContainer;
-use Dotenv\Dotenv;
 use Iterator;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @group Unit
+ */
 class CurrencyTest extends TestCase
 {
 
     /**
      * @dataProvider addProvider
      * @param Currency $currency
+	 * @covers \App\Service\Currency\Currency
+	 * @covers \App\Service\Currency\CurrencyContainer
      */
     public function testAddGet(Currency $currency): void
     {
@@ -29,6 +33,10 @@ class CurrencyTest extends TestCase
         $this->assertEquals($currency->getDateTime(),$container->get($currency->getCode())->getDateTime());
     }
 
+	/**
+	 * @covers \App\Service\Currency\Currency
+	 * @covers \App\Service\Currency\CurrencyContainer
+	 */
     public function testClear(): void
     {
         $container = new CurrencyContainer();
@@ -53,6 +61,7 @@ class CurrencyTest extends TestCase
 	 * @param array $array
 	 * @param bool $pass
 	 * @dataProvider makeFromArrayProvider
+	 * @covers \App\Service\Currency\Currency
 	 */
 	public function testMakeFromArray(array $array, bool $pass): void
 	{

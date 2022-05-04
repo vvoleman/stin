@@ -35,7 +35,8 @@
 		"tracy/tracy": "^2.9"
 	},
 	"scripts": {
-		"phpunit-unit": "./vendor/bin/phpunit --bootstrap vendor/autoload.php --group Unit --testdox --colors=always tests/",
+		"phpunit-unit": "./vendor/bin/phpunit -v --bootstrap vendor/autoload.php --group Unit --testdox --colors=always tests/",
+		"coverage": "./vendor/bin/phpunit --coverage-text -v",
 		"phpstan": "./vendor/bin/phpstan analyse src tests --level 5"
 	}
 }

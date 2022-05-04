@@ -1,0 +1,19 @@
+name: CI for Project
+
+on:
+    push:
+        branches:
+            - main
+
+jobs:
+    phpunit:
+        runs-on: ubuntu-latest
+
+        steps:
+            -   uses: actions/checkout@v2
+
+            -   name: Install PHP Dependencies
+                run: "composer install --no-ansi --no-interaction --no-scripts --no-suggest --prefer-dist"
+
+            -   name: Coverage
+                run: composer run coverage
