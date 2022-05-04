@@ -6,24 +6,30 @@ namespace App\Command;
 
 use App\Bootstrap;
 use App\Exception\Currency\CurrencyContainerException;
+use App\Exception\Currency\IOException;
 use App\Exception\DIException;
-use App\Exception\IOException;
 use App\Response\Command\ICommandResponse;
 use App\Response\Command\SimpleResponse;
 use App\Response\IResponse;
-use App\Service\Currency\CurrencyLoader;
-use App\Service\Currency\DataSource\CnbSource;
+use App\Service\Currency\CurrencyContainerFactory;
+use App\Service\Currency\Retriever\ApiRetriever;
+use App\Service\Currency\Retriever\Client;
+use App\Service\Currency\Retriever\DataSource\CnbSource;
+use App\Service\Currency\Storage\FileStorage;
 use Latte\Engine;
 
 class CurrencyHistoryCommand extends Command
 {
 
-	private const TEMPLATE = '../templates/currencyHistory.latte';
+	protected const TEMPLATE = __DIR__.'/../../templates/currencyHistory.latte';
 
-	private string $currency;
+	protected string $currency;
+
+	protected Engine $engine;
 
 	public function __construct(string $currency) {
 		$this->currency = $currency;
+		$this->engine = Bootstrap::get(Engine::class);
 	}
 
 	/**
@@ -31,13 +37,14 @@ class CurrencyHistoryCommand extends Command
 	 */
 	public function run(): ICommandResponse
 	{
-		$loader = new CurrencyLoader(new CnbSource());
-		$allFiles = $loader->getAllFiles();
+		$storage = new FileStorage();
+		$factory = new CurrencyContainerFactory($storage, new ApiRetriever(new CnbSource(), new Client()));
+		$allRecords = $storage->listAll();
 
 		$records = [];
-		foreach ($allFiles as $file) {
+		foreach ($allRecords as $record) {
 			try {
-				$container = $loader->loadCurrencyContainer($file->getRealPath());
+				$container = $factory->get($record->format('Y-m-d'));
 				$currency = $container->get($this->currency);
 				if ($currency){
 					$records[] = $currency;
@@ -47,12 +54,16 @@ class CurrencyHistoryCommand extends Command
 			}
 		}
 
+		if(count($records) === 0) {
+			return new SimpleResponse('Nemohl jsem najít historii pro měnu '.$this->currency);
+		}
+
 		try {
-			$latte = Bootstrap::get(Engine::class);
+			$latte = $this->engine;
 
-			$currency = count($records) !== 0 ? $records[0] : null;
+			$currency = $records[0];
 
-			$content = $latte->renderToString(realpath(self::TEMPLATE), [
+			$content = $latte->renderToString(self::TEMPLATE, [
 				'currencies' => $records,
 				'mainCurrency' => $currency
 			]);

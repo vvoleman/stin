@@ -18,6 +18,8 @@ class QuestionProcessorTest extends TestCase
 	 * Command with private constructor should always throw exception
 	 * @depends testRun
 	 * @throws UnknownCommandException
+	 * @covers \App\Processor\QuestionProcessor
+	 * @covers \App\Command\Command
 	 */
 	public function testCommandReflection(): void
 	{
@@ -36,6 +38,22 @@ class QuestionProcessorTest extends TestCase
 
     /**
      * @dataProvider questionsProvider
+	 * @covers \App\Processor\QuestionProcessor
+	 * @covers \App\Command\Command
+	 * @covers \App\Command\CurrencyCommand
+	 * @covers \App\Command\CurrencyHistoryCommand
+	 * @covers \App\Command\HelpCommand
+	 * @covers \App\Command\NameCommand
+	 * @covers \App\Command\TimeCommand
+	 * @covers \App\Command\TimeZoneCommand
+	 * @covers \App\Response\Command\SimpleResponse
+	 * @covers \App\Service\Currency\Currency
+	 * @covers \App\Service\Currency\CurrencyContainer
+	 * @covers \App\Service\Currency\CurrencyContainerFactory
+	 * @covers \App\Service\Currency\Retriever\ApiRetriever
+	 * @covers \App\Service\Currency\Retriever\Client
+	 * @covers \App\Service\Currency\Retriever\DataSource\CnbSource
+	 * @covers \App\Service\Currency\Storage\FileStorage
      */
     public function testRun(string $question, bool $pass): void
     {

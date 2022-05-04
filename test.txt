@@ -1,0 +1,502 @@
+PHPUnit 9.5.19 #StandWithUkraine
+
+Runtime:       PHP 8.0.13 with Xdebug 3.1.2
+Configuration: /var/www/stin.wip/public_html/phpunit.xml
+
+EEEEEEEFFRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRSApp\Response\Command\SimpleResponse #817
+   code: 404
+   text: 'Nenalezl jsem měnu aaa.'
+RApp\Response\Command\SimpleResponse #352
+   code: 200
+   text: 'Kurz pro dolar je 23.40 Kč'
+RApp\Response\Command\SimpleResponse #799
+   code: 404
+   text: 'Nenalezl jsem měnu abc.'
+RApp\Response\Command\SimpleResponse #838
+   code: 200
+   text: 'Kurz pro euro je 24.64 Kč'
+RRRRRRRRRRRRRRRR 65 / 74 ( 87%)
+RRRRRRRRR                                                         74 / 74 (100%)
+
+Time: 00:00.351, Memory: 12.00 MB
+
+There were 7 errors:
+
+1) App\Tests\Service\Currency\DataSource\CnbSourceTest::testResponseToContainer with data set #1 ('31.03.2022 #64\nzemě|měěěna|m...|3,463', false)
+Error: Class "App\Service\Currency\DataSource\CnbSource" not found
+
+/var/www/stin.wip/public_html/tests/Service/Currency/DataSource/CnbSourceTest.php:23
+/var/www/stin.wip/public_html/vendor/phpunit/phpunit/phpunit:98
+
+2) App\Tests\Service\Currency\DataSource\CnbSourceTest::testResponseToContainer with data set #0 ('31.03.2022 #64\nzemě|měna|mno...|3,463', true)
+Error: Class "App\Service\Currency\DataSource\CnbSource" not found
+
+/var/www/stin.wip/public_html/tests/Service/Currency/DataSource/CnbSourceTest.php:23
+/var/www/stin.wip/public_html/vendor/phpunit/phpunit/phpunit:98
+
+3) App\Tests\Service\Currency\DataSource\CnbSourceTest::testPrepareRequest with data set #0 (DateTimeImmutable Object (...))
+Error: Class "App\Service\Currency\DataSource\CnbSource" not found
+
+/var/www/stin.wip/public_html/tests/Service/Currency/DataSource/CnbSourceTest.php:66
+/var/www/stin.wip/public_html/vendor/phpunit/phpunit/phpunit:98
+
+4) App\Tests\Service\Currency\DataSource\CnbSourceTest::testPrepareRequest with data set #1 (DateTimeImmutable Object (...))
+Error: Class "App\Service\Currency\DataSource\CnbSource" not found
+
+/var/www/stin.wip/public_html/tests/Service/Currency/DataSource/CnbSourceTest.php:66
+/var/www/stin.wip/public_html/vendor/phpunit/phpunit/phpunit:98
+
+5) App\Tests\Service\Currency\DataSource\CnbSourceTest::testGetFolder
+Error: Class "App\Service\Currency\DataSource\CnbSource" not found
+
+/var/www/stin.wip/public_html/tests/Service/Currency/DataSource/CnbSourceTest.php:83
+/var/www/stin.wip/public_html/vendor/phpunit/phpunit/phpunit:98
+
+6) App\Tests\Service\Currency\Storage\FileStorageTest::testPut with data set "Put file #1" (DateTimeImmutable Object (...), App\Service\Currency\CurrencyContainer Object (...))
+App\Exception\Currency\IOException: fopen(/2022-05-04.json): Failed to open stream: Permission denied
+
+/var/www/stin.wip/public_html/src/Service/Currency/Storage/FileStorage.php:79
+/var/www/stin.wip/public_html/tests/Service/Currency/Storage/FileStorageTest.php:55
+/var/www/stin.wip/public_html/vendor/phpunit/phpunit/phpunit:98
+
+
+/var/www/stin.wip/public_html/tests/Service/Currency/Storage/FileStorageTest.php:57
+/var/www/stin.wip/public_html/vendor/phpunit/phpunit/phpunit:98
+
+7) App\Tests\Service\Currency\Storage\FileStorageTest::testListAll
+Symfony\Component\Finder\Exception\DirectoryNotFoundException: The "" directory does not exist.
+
+/var/www/stin.wip/public_html/vendor/symfony/finder/Finder.php:590
+/var/www/stin.wip/public_html/src/Service/Currency/Storage/FileStorage.php:102
+/var/www/stin.wip/public_html/tests/Service/Currency/Storage/FileStorageTest.php:43
+/var/www/stin.wip/public_html/vendor/phpunit/phpunit/phpunit:98
+
+--
+
+There were 2 failures:
+
+1) App\Tests\Service\Currency\Storage\FileStorageTest::testGet with data set "Exists #1" (DateTimeImmutable Object (...), true)
+Failed asserting that false matches expected true.
+
+/var/www/stin.wip/public_html/tests/Service/Currency/Storage/FileStorageTest.php:28
+/var/www/stin.wip/public_html/vendor/phpunit/phpunit/phpunit:98
+
+2) App\Tests\Service\Currency\Storage\FileStorageTest::testGet with data set "Exists #2" (DateTimeImmutable Object (...), true)
+Failed asserting that false matches expected true.
+
+/var/www/stin.wip/public_html/tests/Service/Currency/Storage/FileStorageTest.php:28
+/var/www/stin.wip/public_html/vendor/phpunit/phpunit/phpunit:98
+
+--
+
+There were 64 risky tests:
+
+1) App\Tests\Service\Currency\Storage\FileStorageTest::testGet with data set "Not exists #2" (DateTimeImmutable Object (...), false)
+This test does not have a @covers annotation but is expected to have one
+
+/var/www/stin.wip/public_html/vendor/phpunit/phpunit/phpunit:98
+
+2) App\Tests\Service\Currency\Storage\FileStorageTest::testGet with data set "Not exists #1" (DateTimeImmutable Object (...), false)
+This test does not have a @covers annotation but is expected to have one
+
+/var/www/stin.wip/public_html/vendor/phpunit/phpunit/phpunit:98
+
+3) App\Tests\Command\HelpCommandTest::testRun
+This test does not have a @covers annotation but is expected to have one
+
+/var/www/stin.wip/public_html/vendor/phpunit/phpunit/phpunit:98
+
+4) App\Tests\Command\HelpCommandTest::testGetRendered
+This test does not have a @covers annotation but is expected to have one
+
+/var/www/stin.wip/public_html/vendor/phpunit/phpunit/phpunit:98
+
+5) App\Tests\Command\NameCommandTest::testRun
+This test does not have a @covers annotation but is expected to have one
+
+/var/www/stin.wip/public_html/vendor/phpunit/phpunit/phpunit:98
+
+6) App\Tests\Command\NameCommandTest::testGetHelp
+This test does not have a @covers annotation but is expected to have one
+
+/var/www/stin.wip/public_html/vendor/phpunit/phpunit/phpunit:98
+
+7) App\Tests\Response\SimpleResponseTest::testResponse
+This test does not have a @covers annotation but is expected to have one
+
+/var/www/stin.wip/public_html/vendor/phpunit/phpunit/phpunit:98
+
+8) App\Tests\Service\API\TokenVerifierTest::testVerify with data set #1 ('aaa', true)
+This test does not have a @covers annotation but is expected to have one
+
+/var/www/stin.wip/public_html/vendor/phpunit/phpunit/phpunit:98
+
+9) App\Tests\Service\API\TokenVerifierTest::testVerify with data set #2 ('eee', false)
+This test does not have a @covers annotation but is expected to have one
+
+/var/www/stin.wip/public_html/vendor/phpunit/phpunit/phpunit:98
+
+10) App\Tests\Service\API\TokenVerifierTest::testVerify with data set #3 ('feeef', false)
+This test does not have a @covers annotation but is expected to have one
+
+/var/www/stin.wip/public_html/vendor/phpunit/phpunit/phpunit:98
+
+11) App\Tests\Service\API\TokenVerifierTest::testVerify with data set #0 ('abcd', true)
+This test does not have a @covers annotation but is expected to have one
+
+/var/www/stin.wip/public_html/vendor/phpunit/phpunit/phpunit:98
+
+12) App\Tests\Service\API\TokenVerifierTest::testUnset
+This test does not have a @covers annotation but is expected to have one
+
+/var/www/stin.wip/public_html/vendor/phpunit/phpunit/phpunit:98
+
+13) App\Tests\Service\Currency\CurrencyTest::testAddGet with data set "Americký dolar" (App\Service\Currency\Currency Object (...))
+This test does not have a @covers annotation but is expected to have one
+
+/var/www/stin.wip/public_html/vendor/phpunit/phpunit/phpunit:98
+
+14) App\Tests\Service\Currency\CurrencyTest::testAddGet with data set "Euro" (App\Service\Currency\Currency Object (...))
+This test does not have a @covers annotation but is expected to have one
+
+/var/www/stin.wip/public_html/vendor/phpunit/phpunit/phpunit:98
+
+15) App\Tests\Service\Currency\CurrencyTest::testAddGet with data set "Čokoláda" (App\Service\Currency\Currency Object (...))
+This test does not have a @covers annotation but is expected to have one
+
+/var/www/stin.wip/public_html/vendor/phpunit/phpunit/phpunit:98
+
+16) App\Tests\Service\Currency\CurrencyTest::testClear
+This test does not have a @covers annotation but is expected to have one
+
+/var/www/stin.wip/public_html/vendor/phpunit/phpunit/phpunit:98
+
+17) App\Tests\Service\Currency\CurrencyTest::testMakeFromArray with data set #0 (array('a', 'a', 1, 1, '2022-05-04'), true)
+This test does not have a @covers annotation but is expected to have one
+
+/var/www/stin.wip/public_html/vendor/phpunit/phpunit/phpunit:98
+
+18) App\Tests\Service\Currency\CurrencyTest::testMakeFromArray with data set #1 (array('a', 'a', 1, 1, 'abcd'), false)
+This test does not have a @covers annotation but is expected to have one
+
+/var/www/stin.wip/public_html/vendor/phpunit/phpunit/phpunit:98
+
+19) App\Tests\Service\Currency\CurrencyTest::testMakeFromArray with data set #2 (array('a', 'a', 1, 1, '2022-05-04'), false)
+This test does not have a @covers annotation but is expected to have one
+
+/var/www/stin.wip/public_html/vendor/phpunit/phpunit/phpunit:98
+
+20) App\Tests\Service\Currency\Retriever\ApiRetrieverTest::testAdjustDateTime with data set "Stay same #2" (DateTimeImmutable Object (...), false)
+This test does not have a @covers annotation but is expected to have one
+
+/var/www/stin.wip/public_html/vendor/phpunit/phpunit/phpunit:98
+
+21) App\Tests\Service\Currency\Retriever\ApiRetrieverTest::testAdjustDateTime with data set "Adjusted #1" (DateTimeImmutable Object (...), true)
+This test does not have a @covers annotation but is expected to have one
+
+/var/www/stin.wip/public_html/vendor/phpunit/phpunit/phpunit:98
+
+22) App\Tests\Service\Currency\Retriever\ApiRetrieverTest::testAdjustDateTime with data set "Adjusted #2" (DateTimeImmutable Object (...), true)
+This test does not have a @covers annotation but is expected to have one
+
+/var/www/stin.wip/public_html/vendor/phpunit/phpunit/phpunit:98
+
+23) App\Tests\Service\Currency\Retriever\ApiRetrieverTest::testAdjustDateTime with data set "Stay same #1" (DateTimeImmutable Object (...), false)
+This test does not have a @covers annotation but is expected to have one
+
+/var/www/stin.wip/public_html/vendor/phpunit/phpunit/phpunit:98
+
+24) App\Tests\Service\Currency\Retriever\ApiRetrieverTest::testExceptionGet
+This test does not have a @covers annotation but is expected to have one
+
+/var/www/stin.wip/public_html/vendor/phpunit/phpunit/phpunit:98
+
+25) App\Tests\Service\Currency\Retriever\ApiRetrieverTest::testGet
+This test does not have a @covers annotation but is expected to have one
+
+/var/www/stin.wip/public_html/vendor/phpunit/phpunit/phpunit:98
+
+26) App\Tests\Util\TimetrackerTraitTest::testStopTime
+This test does not have a @covers annotation but is expected to have one
+
+/var/www/stin.wip/public_html/vendor/phpunit/phpunit/phpunit:98
+
+27) App\Tests\Processor\QuestionProcessorTest::testRun with data set "Question: What time is it?" ('What time is it?', true)
+This test does not have a @covers annotation but is expected to have one
+
+/var/www/stin.wip/public_html/vendor/phpunit/phpunit/phpunit:98
+
+28) App\Tests\Processor\QuestionProcessorTest::testRun with data set "Question: Kolik je hodin v PST?" ('Kolik je hodin v PST?', true)
+This test does not have a @covers annotation but is expected to have one
+
+/var/www/stin.wip/public_html/vendor/phpunit/phpunit/phpunit:98
+
+29) App\Tests\Processor\QuestionProcessorTest::testRun with data set "Empty variable, no leading space, passable" ('Kolik je hodin v?', true)
+This test does not have a @covers annotation but is expected to have one
+
+/var/www/stin.wip/public_html/vendor/phpunit/phpunit/phpunit:98
+
+30) App\Tests\Processor\QuestionProcessorTest::testRun with data set "Empty variable, leading space, passable" ('Kolik je hodin v ?', true)
+This test does not have a @covers annotation but is expected to have one
+
+/var/www/stin.wip/public_html/vendor/phpunit/phpunit/phpunit:98
+
+31) App\Tests\Processor\QuestionProcessorTest::testRun with data set "Empty variable, no question mar, passable" ('Kolik je hodin v ', true)
+This test does not have a @covers annotation but is expected to have one
+
+/var/www/stin.wip/public_html/vendor/phpunit/phpunit/phpunit:98
+
+32) App\Tests\Processor\QuestionProcessorTest::testRun with data set "Invalid timezone" ('Kolik je hodin v Liberci', false)
+This test does not have a @covers annotation but is expected to have one
+
+/var/www/stin.wip/public_html/vendor/phpunit/phpunit/phpunit:98
+
+33) App\Tests\Processor\QuestionProcessorTest::testRun with data set "Question: Kolik je hodin?" ('Kolik je hodin?', true)
+This test does not have a @covers annotation but is expected to have one
+
+/var/www/stin.wip/public_html/vendor/phpunit/phpunit/phpunit:98
+
+34) App\Tests\Processor\QuestionProcessorTest::testRun with data set "Unknown question" ('Jak se máš?', false)
+This test does not have a @covers annotation but is expected to have one
+
+/var/www/stin.wip/public_html/vendor/phpunit/phpunit/phpunit:98
+
+35) App\Tests\Processor\QuestionProcessorTest::testRun with data set "Empty string" ('', false)
+This test does not have a @covers annotation but is expected to have one
+
+/var/www/stin.wip/public_html/vendor/phpunit/phpunit/phpunit:98
+
+36) App\Tests\Processor\QuestionProcessorTest::testRun with data set "Question: Jaký je kurz EUR?" ('Jaký je kurz EUR?', true)
+This test does not have a @covers annotation but is expected to have one
+
+/var/www/stin.wip/public_html/vendor/phpunit/phpunit/phpunit:98
+
+37) App\Tests\Command\CurrencyCommandTest::testRun with data set #2 ('aaa', 404)
+This test does not have a @covers annotation but is expected to have one
+
+/var/www/stin.wip/public_html/vendor/phpunit/phpunit/phpunit:98
+
+38) App\Tests\Command\CurrencyCommandTest::testRun with data set #1 ('USD', 200)
+This test does not have a @covers annotation but is expected to have one
+
+/var/www/stin.wip/public_html/vendor/phpunit/phpunit/phpunit:98
+
+39) App\Tests\Command\CurrencyCommandTest::testRun with data set #3 ('abc', 404)
+This test does not have a @covers annotation but is expected to have one
+
+/var/www/stin.wip/public_html/vendor/phpunit/phpunit/phpunit:98
+
+40) App\Tests\Command\CurrencyCommandTest::testRun with data set #0 ('EUR', 200)
+This test does not have a @covers annotation but is expected to have one
+
+/var/www/stin.wip/public_html/vendor/phpunit/phpunit/phpunit:98
+
+41) App\Tests\Command\TimeZoneCommandTest::testTimeZones with data set "Valid timezone, uppercase: CET" ('CET', 200)
+This test does not have a @covers annotation but is expected to have one
+
+/var/www/stin.wip/public_html/vendor/phpunit/phpunit/phpunit:98
+
+42) App\Tests\Command\TimeZoneCommandTest::testTimeZones with data set "Valid timezone, uppercase: PST" ('PST', 200)
+This test does not have a @covers annotation but is expected to have one
+
+/var/www/stin.wip/public_html/vendor/phpunit/phpunit/phpunit:98
+
+43) App\Tests\Command\TimeZoneCommandTest::testTimeZones with data set "Valid timezone, lowercase: cet" ('cet', 200)
+This test does not have a @covers annotation but is expected to have one
+
+/var/www/stin.wip/public_html/vendor/phpunit/phpunit/phpunit:98
+
+44) App\Tests\Command\TimeZoneCommandTest::testTimeZones with data set "Valid timezone, lowercase: pst" ('pst', 200)
+This test does not have a @covers annotation but is expected to have one
+
+/var/www/stin.wip/public_html/vendor/phpunit/phpunit/phpunit:98
+
+45) App\Tests\Command\TimeZoneCommandTest::testTimeZones with data set "Empty string" ('', 422)
+This test does not have a @covers annotation but is expected to have one
+
+/var/www/stin.wip/public_html/vendor/phpunit/phpunit/phpunit:98
+
+46) App\Tests\Command\TimeZoneCommandTest::testTimeZones with data set "Valid location-like timezone" ('Europe/Prague', 200)
+This test does not have a @covers annotation but is expected to have one
+
+/var/www/stin.wip/public_html/vendor/phpunit/phpunit/phpunit:98
+
+47) App\Tests\Command\TimeZoneCommandTest::testTimeZones with data set "Invalid location-like timezone" ('Europe/Liberec', 422)
+This test does not have a @covers annotation but is expected to have one
+
+/var/www/stin.wip/public_html/vendor/phpunit/phpunit/phpunit:98
+
+48) App\Tests\Command\TimeZoneCommandTest::testTimeZones with data set "Invalid timezone" ('UWU', 422)
+This test does not have a @covers annotation but is expected to have one
+
+/var/www/stin.wip/public_html/vendor/phpunit/phpunit/phpunit:98
+
+49) App\Tests\Service\Currency\CurrencyContainerFactoryTest::testGetDateTime with data set #3 (App\Service\Currency\CurrencyContainerFactory Object (...), 'včera', false)
+This test does not have a @covers annotation but is expected to have one
+
+/var/www/stin.wip/public_html/vendor/phpunit/phpunit/phpunit:98
+
+50) App\Tests\Service\Currency\CurrencyContainerFactoryTest::testGetDateTime with data set #0 (App\Service\Currency\CurrencyContainerFactory Object (...), 'today', true)
+This test does not have a @covers annotation but is expected to have one
+
+/var/www/stin.wip/public_html/vendor/phpunit/phpunit/phpunit:98
+
+51) App\Tests\Service\Currency\CurrencyContainerFactoryTest::testGetDateTime with data set #1 (App\Service\Currency\CurrencyContainerFactory Object (...), '2022-05-03', true)
+This test does not have a @covers annotation but is expected to have one
+
+/var/www/stin.wip/public_html/vendor/phpunit/phpunit/phpunit:98
+
+52) App\Tests\Service\Currency\CurrencyContainerFactoryTest::testGetDateTime with data set #2 (App\Service\Currency\CurrencyContainerFactory Object (...), 'todaysda', false)
+This test does not have a @covers annotation but is expected to have one
+
+/var/www/stin.wip/public_html/vendor/phpunit/phpunit/phpunit:98
+
+53) App\Tests\Service\Currency\CurrencyContainerFactoryTest::testContainerInStorage with data set #0 (App\Service\Currency\CurrencyContainerFactory Object (...), '2022-05-01')
+This test does not have a @covers annotation but is expected to have one
+
+/var/www/stin.wip/public_html/vendor/phpunit/phpunit/phpunit:98
+
+54) App\Tests\Service\Currency\CurrencyContainerFactoryTest::testContainerInStorage with data set #1 (App\Service\Currency\CurrencyContainerFactory Object (...), '2022-05-01')
+This test does not have a @covers annotation but is expected to have one
+
+/var/www/stin.wip/public_html/vendor/phpunit/phpunit/phpunit:98
+
+55) App\Tests\Service\Currency\CurrencyContainerFactoryTest::testRetrieverError with data set #0 (App\Tests\Mock\Currency\Storage\Storage Object (...), App\Tests\Mock\Currency\Retriever\Retriever Object (...), '2022-05-01', true, false, false, null)
+This test does not have a @covers annotation but is expected to have one
+
+/var/www/stin.wip/public_html/vendor/phpunit/phpunit/phpunit:98
+
+56) App\Tests\Service\Currency\CurrencyContainerFactoryTest::testRetrieverError with data set #1 (App\Tests\Mock\Currency\Storage\Storage Object (...), App\Tests\Mock\Currency\Retriever\Retriever Object (...), '2022-05-01', true, true, true, null)
+This test does not have a @covers annotation but is expected to have one
+
+/var/www/stin.wip/public_html/vendor/phpunit/phpunit/phpunit:98
+
+57) App\Tests\Service\Currency\CurrencyContainerFactoryTest::testRetrieverError with data set #2 (App\Tests\Mock\Currency\Storage\Storage Object (...), App\Tests\Mock\Currency\Retriever\Retriever Object (...), '2022-05-01', true, true, true, 'App\Exception\Currency\Storag...eption')
+This test does not have a @covers annotation but is expected to have one
+
+/var/www/stin.wip/public_html/vendor/phpunit/phpunit/phpunit:98
+
+58) App\Tests\Service\Currency\CurrencyContainerTest::testAddCountClear with data set #0 (App\Service\Currency\Currency Object (...))
+This test does not have a @covers annotation but is expected to have one
+
+/var/www/stin.wip/public_html/vendor/phpunit/phpunit/phpunit:98
+
+59) App\Tests\Service\Currency\CurrencyContainerTest::testGet with data set #0 (App\Service\Currency\CurrencyContainer Object (...), 'a', true)
+This test does not have a @covers annotation but is expected to have one
+
+/var/www/stin.wip/public_html/vendor/phpunit/phpunit/phpunit:98
+
+60) App\Tests\Service\Currency\CurrencyContainerTest::testGet with data set #1 (App\Service\Currency\CurrencyContainer Object (...), 'b', true)
+This test does not have a @covers annotation but is expected to have one
+
+/var/www/stin.wip/public_html/vendor/phpunit/phpunit/phpunit:98
+
+61) App\Tests\Service\Currency\CurrencyContainerTest::testGet with data set #3 (App\Service\Currency\CurrencyContainer Object (...), 'c', false)
+This test does not have a @covers annotation but is expected to have one
+
+/var/www/stin.wip/public_html/vendor/phpunit/phpunit/phpunit:98
+
+62) App\Tests\Service\Currency\CurrencyContainerTest::testGet with data set #4 (App\Service\Currency\CurrencyContainer Object (...), 'd', false)
+This test does not have a @covers annotation but is expected to have one
+
+/var/www/stin.wip/public_html/vendor/phpunit/phpunit/phpunit:98
+
+63) App\Tests\Service\Currency\CurrencyContainerTest::testGet with data set #2 (App\Service\Currency\CurrencyContainer Object (...), 'A', true)
+This test does not have a @covers annotation but is expected to have one
+
+/var/www/stin.wip/public_html/vendor/phpunit/phpunit/phpunit:98
+
+64) App\Tests\Service\Currency\CurrencyContainerTest::testToArray with data set #0 (App\Service\Currency\CurrencyContainer Object (...), array(array('a', 'a', 1, 1.0, '2022-05-04 21:49:43')))
+This test does not have a @covers annotation but is expected to have one
+
+/var/www/stin.wip/public_html/vendor/phpunit/phpunit/phpunit:98
+
+--
+
+There was 1 skipped test:
+
+1) App\Tests\Processor\QuestionProcessorTest::testCommandReflection
+This test depends on "App\Tests\Processor\QuestionProcessorTest::testRun" to pass.
+
+/var/www/stin.wip/public_html/vendor/phpunit/phpunit/phpunit:98
+
+ERRORS!
+Tests: 74, Assertions: 86, Errors: 7, Failures: 2, Skipped: 1, Risky: 64.
+
+
+Code Coverage Report:    
+  2022-05-04 21:49:44    
+                         
+ Summary:                
+  Classes:  0.00% (0/21) 
+  Methods:  2.67% (2/75) 
+  Lines:    1.99% (6/302)
+
+App\Bootstrap
+  Methods:   0.00% ( 0/ 2)   Lines:   0.00% (  0/ 11)
+App\Command\Command
+  Methods:   0.00% ( 0/ 3)   Lines:   0.00% (  0/ 25)
+App\Command\CurrencyCommand
+  Methods:   0.00% ( 0/ 4)   Lines:   0.00% (  0/ 11)
+App\Command\CurrencyHistoryCommand
+  Methods:   0.00% ( 0/ 4)   Lines:   0.00% (  0/ 19)
+App\Command\HelpCommand
+  Methods:   0.00% ( 0/ 5)   Lines:   0.00% (  0/ 14)
+App\Command\NameCommand
+  Methods:   0.00% ( 0/ 3)   Lines:   0.00% (  0/  4)
+App\Command\TimeCommand
+  Methods:   0.00% ( 0/ 3)   Lines:   0.00% (  0/  3)
+App\Command\TimeZoneCommand
+  Methods:   0.00% ( 0/ 4)   Lines:   0.00% (  0/ 10)
+App\Controller\HomeController
+  Methods:   0.00% ( 0/ 3)   Lines:   0.00% (  0/ 26)
+App\Exception\CommandException
+  Methods:   0.00% ( 0/ 1)   Lines:   0.00% (  0/  1)
+App\Exception\Currency\ClientException
+  Methods:  ( 0/ 0)   Lines:  (  0/  0)
+App\Exception\Currency\CurrencyContainerException
+  Methods:  ( 0/ 0)   Lines:  (  0/  0)
+App\Exception\Currency\CurrencyException
+  Methods:  ( 0/ 0)   Lines:  (  0/  0)
+App\Exception\Currency\CurrencyRequestException
+  Methods:  ( 0/ 0)   Lines:  (  0/  0)
+App\Exception\Currency\IOException
+  Methods:  ( 0/ 0)   Lines:  (  0/  0)
+App\Exception\Currency\RetrieverException
+  Methods:  ( 0/ 0)   Lines:  (  0/  0)
+App\Exception\Currency\StorageException
+  Methods:  ( 0/ 0)   Lines:  (  0/  0)
+App\Exception\DIException
+  Methods:  ( 0/ 0)   Lines:  (  0/  0)
+App\Exception\EnvironmentException
+  Methods:  ( 0/ 0)   Lines:  (  0/  0)
+App\Exception\InitializationException
+  Methods:  ( 0/ 0)   Lines:  (  0/  0)
+App\Exception\InvalidDatetimeException
+  Methods:  ( 0/ 0)   Lines:  (  0/  0)
+App\Exception\InvalidParametersException
+  Methods:  ( 0/ 0)   Lines:  (  0/  0)
+App\Exception\UnknownCommandException
+  Methods:  ( 0/ 0)   Lines:  (  0/  0)
+App\Processor\QuestionProcessor
+  Methods:   0.00% ( 0/ 6)   Lines:   0.00% (  0/ 28)
+App\Response\Command\SimpleResponse
+  Methods:   0.00% ( 0/ 3)   Lines:   0.00% (  0/  4)
+App\Service\API\TokenVerifier
+  Methods:   0.00% ( 0/ 1)   Lines:   0.00% (  0/  4)
+App\Service\Currency\Currency
+  Methods:   0.00% ( 0/ 9)   Lines:   0.00% (  0/ 24)
+App\Service\Currency\CurrencyContainer
+  Methods:   0.00% ( 0/ 6)   Lines:   0.00% (  0/  9)
+App\Service\Currency\CurrencyContainerFactory
+  Methods:   0.00% ( 0/ 3)   Lines:   0.00% (  0/ 32)
+App\Service\Currency\Retriever\ApiRetriever
+  Methods:   0.00% ( 0/ 3)   Lines:   0.00% (  0/ 10)
+App\Service\Currency\Retriever\Client
+  Methods:   0.00% ( 0/ 2)   Lines:   0.00% (  0/  4)
+App\Service\Currency\Retriever\DataSource\CnbSource
+  Methods:   0.00% ( 0/ 3)   Lines:   0.00% (  0/ 23)
+App\Service\Currency\Storage\FileStorage
+  Methods:  40.00% ( 2/ 5)   Lines:  16.67% (  6/ 36)
+App\Util\TimetrackerTrait
+  Methods:   0.00% ( 0/ 2)   Lines:   0.00% (  0/  4)

@@ -3,6 +3,11 @@
 namespace App;
 
 use App\Exception\DIException;
+use App\Service\Currency\CurrencyContainerFactory;
+use App\Service\Currency\Retriever\ApiRetriever;
+use App\Service\Currency\Retriever\Client;
+use App\Service\Currency\Retriever\DataSource\CnbSource;
+use App\Service\Currency\Storage\FileStorage;
 use Latte\Engine;
 use Dotenv\Dotenv;
 use Pecee\SimpleRouter\SimpleRouter;

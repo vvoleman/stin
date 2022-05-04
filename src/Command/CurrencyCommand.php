@@ -2,11 +2,16 @@
 
 namespace App\Command;
 
+use App\Exception\Currency\CurrencyContainerException;
+use App\Exception\InvalidDatetimeException;
 use App\Response\Command\ICommandResponse;
 use App\Response\Command\SimpleResponse;
 use App\Response\IResponse;
-use App\Service\Currency\CurrencyLoader;
-use App\Service\Currency\DataSource\CnbSource;
+use App\Service\Currency\CurrencyContainerFactory;
+use App\Service\Currency\Retriever\ApiRetriever;
+use App\Service\Currency\Retriever\Client;
+use App\Service\Currency\Retriever\DataSource\CnbSource;
+use App\Service\Currency\Storage\FileStorage;
 
 class CurrencyCommand extends Command
 {
@@ -22,8 +27,13 @@ class CurrencyCommand extends Command
 	 */
 	public function run(): ICommandResponse
 	{
-		$loader = new CurrencyLoader(new CnbSource());
-		$container = $loader->loadCurrenciesForDate();
+		$factory = new CurrencyContainerFactory(new FileStorage(), new ApiRetriever(new CnbSource(), new Client()));
+
+		try {
+			$container = $factory->get();
+		} catch (CurrencyContainerException | InvalidDatetimeException) {
+			return new SimpleResponse('V tuto chvíli nemohu tento příkaz zpracovat',IResponse::HTTP_SERVER_ERROR);
+		}
 
 		$currency = $container->get($this->currency);
 

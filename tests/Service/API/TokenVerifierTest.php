@@ -7,6 +7,9 @@ use App\Service\API\TokenVerifier;
 use Iterator;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @group Unit
+ */
 class TokenVerifierTest extends TestCase
 {
 
@@ -14,6 +17,7 @@ class TokenVerifierTest extends TestCase
 	 * @param string $token
 	 * @param bool $pass
 	 * @dataProvider verifyProvider
+	 * @covers \App\Service\API\TokenVerifier
 	 */
 	public function testVerify(string $token, bool $pass): void
 	{
@@ -30,6 +34,10 @@ class TokenVerifierTest extends TestCase
 		yield ['feeef', false];
 	}
 
+	/**
+	 * @throws EnvironmentException
+	 * @covers \App\Service\API\TokenVerifier
+	 */
 	public function testUnset(): void
 	{
 		unset($_ENV["TOKENS"]);

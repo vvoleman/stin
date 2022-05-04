@@ -14,6 +14,12 @@ class HelpCommand extends Command
 
 	private const TEMPLATE = '../templates/help.latte';
 
+	protected Engine $engine;
+
+	public function __construct() {
+		$this->engine = Bootstrap::get(Engine::class);
+	}
+
 	public function run(): ICommandResponse
 	{
 		// Get all commands
@@ -36,12 +42,12 @@ class HelpCommand extends Command
 
 	protected function getCommands(): array
 	{
-		return require "../config/commands.php";
+		return require __DIR__."/../../config/commands.php";
 	}
 
 	protected function getRendered(array $params): string
 	{
-		$latte = Bootstrap::get(Engine::class);
+		$latte = $this->engine;
 		return $latte->renderToString(self::TEMPLATE, [
 			"helps" => $params
 		]);

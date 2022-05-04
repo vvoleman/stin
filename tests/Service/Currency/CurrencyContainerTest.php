@@ -7,12 +7,17 @@ use App\Service\Currency\CurrencyContainer;
 use Iterator;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @group Unit
+ */
 class CurrencyContainerTest extends TestCase
 {
 
 	/**
 	 * @param Currency $currency
 	 * @dataProvider addCountClearProvider
+	 * @covers \App\Service\Currency\CurrencyContainer
+	 * @covers \App\Service\Currency\Currency
 	 */
 	public function testAddCountClear(Currency $currency): void
 	{
@@ -36,6 +41,7 @@ class CurrencyContainerTest extends TestCase
 	 * @param string $key
 	 * @param bool $pass
 	 * @dataProvider getProvider
+	 * @covers \App\Service\Currency\CurrencyContainer
 	 */
 	public function testGet(CurrencyContainer $container, string $key, bool $pass): void
 	{
@@ -62,6 +68,8 @@ class CurrencyContainerTest extends TestCase
 	 * @param CurrencyContainer $container
 	 * @param array $expected
 	 * @dataProvider toArrayProvider
+	 * @covers \App\Service\Currency\CurrencyContainer
+	 * @covers \App\Service\Currency\Currency
 	 */
 	public function testToArray(CurrencyContainer $container, array $expected): void
 	{
