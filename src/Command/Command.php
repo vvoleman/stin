@@ -21,10 +21,7 @@ abstract class Command
 	/**
 	 * @return array<string,mixed>
 	 */
-	public abstract function getHelp(): array;
-
-
-		// Service
+	public static abstract function getHelp(): array;
 
 	public static function getRegExpMasks(): array|string
 	{
