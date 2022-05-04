@@ -24,10 +24,10 @@ class TimeCommand extends Command
      */
     public static function getMask(): array
     {
-        return ["[Kolik] je [hodin]a?","What time is it?"];
+        return ["[Kolik] je [hodin]a?","What time is it?","[Kolik je]?"];
     }
 
-	public function getHelp(): array
+	public static function getHelp(): array
 	{
 		return [
 			'name' => 'Čas',

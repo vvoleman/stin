@@ -30,7 +30,7 @@ class NameCommand extends Command
 		return ['[jméno]','[jmen]'];
 	}
 
-	public function getHelp(): array
+	public static function getHelp(): array
 	{
 		return [
 			'name' => 'Jméno',

@@ -35,7 +35,7 @@ class CurrencyCommand extends Command
 
 	}
 
-	public function getHelp(): array
+	public static function getHelp(): array
 	{
 		return [
 			'name' => 'Měna',

@@ -66,13 +66,13 @@ class CurrencyHistoryCommand extends Command
 	/**
 	 * @inheritDoc
 	 */
-	public function getHelp(): array
+	public static function getHelp(): array
 	{
 		return [
 			'name' => 'Historie měny',
 			'description' => 'Vrátí nedávno historii kurzů měny',
 			'examples' => [
-				'Jaká je nedávný kurz EUR?',
+				'Jaký je nedávný kurz EUR?',
 				'Jaká je historie EUR?'
 			]
 		];
