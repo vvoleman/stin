@@ -21,9 +21,8 @@ class Bootstrap
     public static function run(): void
     {
         // Environmental vars
-        $dotenv = Dotenv::createImmutable(__DIR__."/../",[".env",".env.local"],true);
+        $dotenv = Dotenv::createImmutable(__DIR__."/../",[".env.local",".env",],true);
         $dotenv->safeLoad();
-
         // Router
         require_once dirname(__DIR__).'/routes.php';
         SimpleRouter::setDefaultNamespace('App\Controller');

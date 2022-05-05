@@ -30,7 +30,7 @@ class CnbSourceTest extends TestCase
 
 		$isOk = true;
 		try {
-			$container = $cnb->responseToContainer($response);
+			$container = $cnb->responseToContainer($response, new \DateTimeImmutable());
 		} catch (\Exception) {
 			$isOk = false;
 		}

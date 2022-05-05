@@ -31,8 +31,13 @@ class CurrencyContainerFactory
 		try {
 			$dateTime = new \DateTimeImmutable($date);
 
-			//Adjust time for refresh
-			$adjusted = $this->retriever->adjustDateTime($dateTime);
+			//Adjust time for refresh for today
+			if($dateTime->format('Y-m-d') === (new \DateTimeImmutable())->format('Y-m-d')){
+				$adjusted = $this->retriever->adjustDateTime($dateTime);
+			}else{
+				$adjusted = $dateTime;
+			}
+
 		} catch (Exception) {
 			throw new InvalidDatetimeException('Incorrect datetime format of $date');
 		}
@@ -52,7 +57,7 @@ class CurrencyContainerFactory
 
 		// Try to retrieve container
 		try {
-			$container = $this->retriever->get($dateTime);
+			$container = $this->retriever->get($adjusted);
 		} catch (RetrieverException) {
 			// TODO: Log
 			// Try to get older
@@ -78,7 +83,7 @@ class CurrencyContainerFactory
 
 		// So we got our container, let's save it
 		try {
-			$this->storage->put($dateTime, $container);
+			$this->storage->put($adjusted, $container);
 		} catch (StorageException) {
 			// TODO: Log
 		}

@@ -19,7 +19,7 @@ class CnbSource implements ICurrencySource
 
 	public const REFRESH_TIME = '14:30';
 
-	public function responseToContainer(ResponseInterface $response): CurrencyContainer
+	public function responseToContainer(ResponseInterface $response, DateTimeImmutable $dateTime): CurrencyContainer
 	{
 		$data = (string) $response->getBody();
 
@@ -28,7 +28,7 @@ class CnbSource implements ICurrencySource
 		$csv->setHeaderOffset(1);
 		$iterator = $csv->getIterator();
 
-		$date = new \DateTime();
+		$date = \DateTime::createFromImmutable($dateTime);
 		$container = new CurrencyContainer();
 		$isDirty = false;
 		foreach ($iterator as $item) {

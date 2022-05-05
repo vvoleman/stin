@@ -25,6 +25,7 @@ class FileStorageTest extends TestCase
 	 * @dataProvider getProvider
 	 * @throws StorageException
 	 * @covers       \App\Service\Currency\Storage\FileStorage
+	 * @covers \App\Service\Currency\Storage\FileStorage::get
 	 * @covers       \App\Service\Currency\Currency
 	 * @covers       \App\Service\Currency\CurrencyContainer
 	 */
@@ -47,6 +48,7 @@ class FileStorageTest extends TestCase
 
 	/**
 	 * @covers \App\Service\Currency\Storage\FileStorage
+	 * @covers \App\Service\Currency\Storage\FileStorage::listAll
 	 */
 	public function testListAll()
 	{
@@ -57,14 +59,19 @@ class FileStorageTest extends TestCase
 
 	/**
 	 * @dataProvider putProvider
-	 * @doesNotPerformAssertions
 	 * @covers       \App\Service\Currency\Storage\FileStorage
+	 * @covers \App\Service\Currency\Storage\FileStorage::put
+	 * @covers \App\Service\Currency\Currency
+	 * @covers \App\Service\Currency\CurrencyContainer
 	 */
 	public function testPut(DateTimeImmutable $dateTime, CurrencyContainer $container): void
 	{
 		try {
-			$this->getStorage()->put($dateTime, $container);
+			$storage = new FileStorage(__DIR__."/data");
+			$storage->put($dateTime, $container);
 			$this->clearAfterPut($dateTime);
+
+			$this->assertTrue(true);
 		} catch (\Exception $e) {
 			throw new IOException($e);
 		}
@@ -92,6 +99,7 @@ class FileStorageTest extends TestCase
 	 * @param DateTimeImmutable $dateTime
 	 * @dataProvider getFileNameProvider
 	 * @covers \App\Service\Currency\Storage\FileStorage
+	 * @covers \App\Service\Currency\Storage\FileStorage::get
 	 */
 	public function testGetFileName(DateTimeImmutable $dateTime): void
 	{
@@ -108,6 +116,9 @@ class FileStorageTest extends TestCase
 
 	/**
 	 * @covers \App\Service\Currency\Storage\FileStorage
+	 * @covers \App\Service\Currency\Currency
+	 * @covers \App\Service\Currency\CurrencyContainer
+	 * @covers \App\Service\Currency\Storage\FileStorage::get
 	 */
 	public function testCorruptData(): void
 	{
@@ -121,6 +132,7 @@ class FileStorageTest extends TestCase
 	 * @covers \App\Service\Currency\Storage\FileStorage
 	 * @covers \App\Service\Currency\Currency
 	 * @covers \App\Service\Currency\CurrencyContainer
+	 * @covers \App\Service\Currency\Storage\FileStorage::get
 	 */
 	public function testMissingDataFields(): void
 	{
@@ -141,6 +153,7 @@ class FileStorageTest extends TestCase
 
 	/**
 	 * @covers \App\Service\Currency\Storage\FileStorage
+	 * @covers \App\Service\Currency\Storage\FileStorage::get
 	 */
 	public function testFileNotExist(): void
 	{
@@ -151,6 +164,7 @@ class FileStorageTest extends TestCase
 
 	/**
 	 * @covers \App\Service\Currency\Storage\FileStorage
+	 * @covers \App\Service\Currency\Storage\FileStorage::get
 	 */
 	public function testNonTimestampFile(): void
 	{
