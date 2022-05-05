@@ -7,6 +7,7 @@ use App\Exception\Currency\StorageException;
 use App\Service\Currency\Currency;
 use App\Service\Currency\CurrencyContainer;
 use App\Service\Currency\Storage\FileStorage;
+use Cassandra\Date;
 use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
 
@@ -23,9 +24,9 @@ class FileStorageTest extends TestCase
 	 * @param bool $pass
 	 * @dataProvider getProvider
 	 * @throws StorageException
-	 * @covers \App\Service\Currency\Storage\FileStorage
-	 * @covers \App\Service\Currency\Currency
-	 * @covers \App\Service\Currency\CurrencyContainer
+	 * @covers       \App\Service\Currency\Storage\FileStorage
+	 * @covers       \App\Service\Currency\Currency
+	 * @covers       \App\Service\Currency\CurrencyContainer
 	 */
 	public function testGet(DateTimeImmutable $dateTime, bool $pass)
 	{
@@ -57,13 +58,14 @@ class FileStorageTest extends TestCase
 	/**
 	 * @dataProvider putProvider
 	 * @doesNotPerformAssertions
-	 * @covers \App\Service\Currency\Storage\FileStorage
+	 * @covers       \App\Service\Currency\Storage\FileStorage
 	 */
 	public function testPut(DateTimeImmutable $dateTime, CurrencyContainer $container): void
 	{
 		try {
 			$this->getStorage()->put($dateTime, $container);
-		} catch (\Exception $e){
+			$this->clearAfterPut($dateTime);
+		} catch (\Exception $e) {
 			throw new IOException($e);
 		}
 	}
@@ -73,20 +75,16 @@ class FileStorageTest extends TestCase
 		$container = new CurrencyContainer();
 		$container->add(new Currency('a', 'a', 1, 1, new \DateTime()));
 		return [
-			'Put file #1' => [new DateTimeImmutable(),$container]
+			'Put file #1' => [new DateTimeImmutable(), $container]
 		];
 	}
 
-	public function clearAfterPut()
+	public function clearAfterPut(DateTimeImmutable $dateTime)
 	{
-		$data = $this->putProvider();
+		$fileName = $this->getStorage()->getFileName($dateTime);
 
-		foreach ($data as $key => $value) {
-			$fileName = $this->getStorage()->getFileName($value[0]);
-
-			if(file_exists($fileName)){
-				unlink($fileName);
-			}
+		if (file_exists($fileName)) {
+			unlink($fileName);
 		}
 	}
 
@@ -95,10 +93,10 @@ class FileStorageTest extends TestCase
 	 */
 	public function testCorruptData(): void
 	{
-		$storage = new FileStorage(__DIR__.'/corrupt_data');
+		$storage = new FileStorage(__DIR__ . '/corrupt_data');
 
 		$this->expectException(IOException::class);
-		$storage->get(DateTimeImmutable::createFromFormat('Y-m-d','2022-05-04'));
+		$storage->get(DateTimeImmutable::createFromFormat('Y-m-d', '2022-05-04'));
 	}
 
 	/**
@@ -108,9 +106,9 @@ class FileStorageTest extends TestCase
 	 */
 	public function testMissingDataFields(): void
 	{
-		$storage = new FileStorage(__DIR__.'/corrupt_data');
+		$storage = new FileStorage(__DIR__ . '/corrupt_data');
 		$this->expectException(StorageException::class);
-		$storage->get(DateTimeImmutable::createFromFormat('Y-m-d','2022-05-03'));
+		$storage->get(DateTimeImmutable::createFromFormat('Y-m-d', '2022-05-03'));
 	}
 
 //	/**
@@ -128,9 +126,9 @@ class FileStorageTest extends TestCase
 	 */
 	public function testFileNotExist(): void
 	{
-		$storage = new FileStorage(__DIR__.'/data');
+		$storage = new FileStorage(__DIR__ . '/data');
 
-		$this->assertNull($storage->get(DateTimeImmutable::createFromFormat('Y-m-d','2022-01-03')));
+		$this->assertNull($storage->get(DateTimeImmutable::createFromFormat('Y-m-d', '2022-01-03')));
 	}
 
 	/**
@@ -138,7 +136,7 @@ class FileStorageTest extends TestCase
 	 */
 	public function testNonTimestampFile(): void
 	{
-		$storage = new FileStorage(__DIR__.'/corrupt_data');
+		$storage = new FileStorage(__DIR__ . '/corrupt_data');
 
 		$this->assertCount(2, $storage->listAll());
 	}
@@ -146,7 +144,7 @@ class FileStorageTest extends TestCase
 	private function getStorage(): FileStorage
 	{
 		if (!isset($this->storage)) {
-			$this->storage = new FileStorage(realpath((__DIR__.'/data')));
+			$this->storage = new FileStorage(realpath((__DIR__ . '/data')));
 		}
 
 		return $this->storage;

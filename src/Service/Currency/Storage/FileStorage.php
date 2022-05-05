@@ -104,6 +104,7 @@ class FileStorage implements IStorage
 	public function listAll(): array
 	{
 		$finder = new Finder();
+		$finder->depth('== 0');
 
 		// Get *.json in specific folder, sort by name
 		$finder->name("*.json")->files()->in($this->storageFolder)->sortByName();
@@ -121,7 +122,6 @@ class FileStorage implements IStorage
 			}
 			$files[] = $date;
 		}
-
 		return $files;
 	}
 
