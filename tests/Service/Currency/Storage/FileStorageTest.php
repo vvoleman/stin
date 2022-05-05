@@ -89,6 +89,24 @@ class FileStorageTest extends TestCase
 	}
 
 	/**
+	 * @param DateTimeImmutable $dateTime
+	 * @dataProvider getFileNameProvider
+	 * @covers \App\Service\Currency\Storage\FileStorage
+	 */
+	public function testGetFileName(DateTimeImmutable $dateTime): void
+	{
+		$this->assertGreaterThan(0, strlen($this->getStorage()->getFileName($dateTime)));
+	}
+
+	public function getFileNameProvider(): array
+	{
+		return [
+			"Pass #1" => [new DateTimeImmutable()],
+			"Pass #2" => [(new DateTimeImmutable())->modify('-1 days')],
+		];
+	}
+
+	/**
 	 * @covers \App\Service\Currency\Storage\FileStorage
 	 */
 	public function testCorruptData(): void
