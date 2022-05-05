@@ -4,11 +4,14 @@ declare(strict_types=1);
 
 namespace App\Tests\Service\Currency\DataSource;
 
-use App\Service\Currency\DataSource\CnbSource;
+use App\Service\Currency\Retriever\DataSource\CnbSource;
 use App\Tests\Mock\HTTP\Response;
 use Iterator;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @group Unit
+ */
 class CnbSourceTest extends TestCase
 {
 
@@ -16,6 +19,9 @@ class CnbSourceTest extends TestCase
 	 * @param string $data
 	 * @param bool $pass
 	 * @dataProvider responseToContainerProvider
+	 * @covers \App\Service\Currency\Retriever\DataSource\CnbSource
+	 * @covers \App\Service\Currency\CurrencyContainer
+	 * @covers \App\Service\Currency\Currency
 	 */
 	public function testResponseToContainer(string $data, bool $pass): void
 	{
@@ -24,7 +30,7 @@ class CnbSourceTest extends TestCase
 
 		$isOk = true;
 		try {
-			$container = $cnb->responseToContainer($response);
+			$container = $cnb->responseToContainer($response, new \DateTimeImmutable());
 		} catch (\Exception) {
 			$isOk = false;
 		}
@@ -60,6 +66,9 @@ class CnbSourceTest extends TestCase
 	/**
 	 * @param \DateTimeImmutable $dateTime
 	 * @dataProvider prepareRequestProvider
+	 * @covers \App\Service\Currency\Retriever\DataSource\CnbSource
+	 * @covers \App\Service\Currency\Currency
+	 * @covers \App\Service\Currency\CurrencyContainer
 	 */
 	public function testPrepareRequest(\DateTimeImmutable $dateTime): void
 	{
@@ -76,12 +85,6 @@ class CnbSourceTest extends TestCase
 
 		yield [$date->modify('+2 years')];
 		yield [$date];
-	}
-
-	public function testGetFolder(): void
-	{
-		$cnb = new CnbSource();
-		$this->assertNotEmpty($cnb::getFolder());
 	}
 
 }

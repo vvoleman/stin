@@ -3,6 +3,11 @@
 namespace App;
 
 use App\Exception\DIException;
+use App\Service\Currency\CurrencyContainerFactory;
+use App\Service\Currency\Retriever\ApiRetriever;
+use App\Service\Currency\Retriever\Client;
+use App\Service\Currency\Retriever\DataSource\CnbSource;
+use App\Service\Currency\Storage\FileStorage;
 use Latte\Engine;
 use Dotenv\Dotenv;
 use Pecee\SimpleRouter\SimpleRouter;
@@ -16,9 +21,8 @@ class Bootstrap
     public static function run(): void
     {
         // Environmental vars
-        $dotenv = Dotenv::createImmutable(__DIR__."/../",[".env",".env.local"],true);
+        $dotenv = Dotenv::createImmutable(__DIR__."/../",[".env.local",".env",],true);
         $dotenv->safeLoad();
-
         // Router
         require_once dirname(__DIR__).'/routes.php';
         SimpleRouter::setDefaultNamespace('App\Controller');

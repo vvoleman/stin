@@ -3,4 +3,7 @@
 /.idea/
 .env
 /.phpunit.result.cache
+.phpunit.result.cache
 /storage/curency/
+/-v
+.phpunit.cache

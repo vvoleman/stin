@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 
-namespace App\Service\Currency\DataSource;
+namespace App\Service\Currency\Retriever\DataSource;
 
 use App\Service\Currency\Currency;
 use App\Service\Currency\CurrencyContainer;
@@ -17,12 +17,9 @@ class CnbSource implements ICurrencySource
 
 	public const API_ENDPOINT = 'https://www.cnb.cz/cs/financni-trhy/devizovy-trh/kurzy-devizoveho-trhu/kurzy-devizoveho-trhu/denni_kurz.txt';
 
-	public static function getFolder(): string
-	{
-		return "cnb";
-	}
+	public const REFRESH_TIME = '14:30';
 
-	public function responseToContainer(ResponseInterface $response): CurrencyContainer
+	public function responseToContainer(ResponseInterface $response, DateTimeImmutable $dateTime): CurrencyContainer
 	{
 		$data = (string) $response->getBody();
 
@@ -31,7 +28,7 @@ class CnbSource implements ICurrencySource
 		$csv->setHeaderOffset(1);
 		$iterator = $csv->getIterator();
 
-		$date = new \DateTime();
+		$date = \DateTime::createFromImmutable($dateTime);
 		$container = new CurrencyContainer();
 		$isDirty = false;
 		foreach ($iterator as $item) {
@@ -60,4 +57,8 @@ class CnbSource implements ICurrencySource
 		return new Request('GET', $uri);
 	}
 
+	public function getRefreshDateTime(): ?DateTimeImmutable
+	{
+		return DateTimeImmutable::createFromFormat('H:i', self::REFRESH_TIME);
+	}
 }

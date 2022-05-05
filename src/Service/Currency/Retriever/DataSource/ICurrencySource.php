@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service\Currency\DataSource;
+namespace App\Service\Currency\Retriever\DataSource;
 
 use App\Service\Currency\CurrencyContainer;
 use DateTimeImmutable;
@@ -10,10 +10,10 @@ use Psr\Http\Message\ResponseInterface;
 interface ICurrencySource
 {
 
-	public function responseToContainer(ResponseInterface $response): CurrencyContainer;
+	public function responseToContainer(ResponseInterface $response, DateTimeImmutable $dateTime): CurrencyContainer;
 
 	public function prepareRequest(DateTimeImmutable $dateTime): Request;
 
-    public static function getFolder(): string;
+	public function getRefreshDateTime(): ?DateTimeImmutable;
 
 }
