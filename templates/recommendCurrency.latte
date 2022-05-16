@@ -1,0 +1,7 @@
+{varType float $avg}
+{varType int $growth}
+{varType array $currencies}
+{varType App\Service\Currency\Currency $currency}
+
+<h3>{$currency->getName()|capitalize} se {if $growth <= 0}<b style="color:green">vyplatí</b>{else}<b
+            style="color:green">vyplatí</b>{/if} kupovat</h3>

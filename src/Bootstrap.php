@@ -8,6 +8,7 @@ use App\Service\Currency\Retriever\ApiRetriever;
 use App\Service\Currency\Retriever\Client;
 use App\Service\Currency\Retriever\DataSource\CnbSource;
 use App\Service\Currency\Storage\FileStorage;
+use App\Service\Currency\Storage\IStorage;
 use Latte\Engine;
 use Dotenv\Dotenv;
 use Pecee\SimpleRouter\SimpleRouter;
@@ -32,6 +33,12 @@ class Bootstrap
 		$latte->setTempDirectory('../temp');
 
 		self::$container[$latte::class] = $latte;
+
+		$storage = new FileStorage();
+		$retriever = new ApiRetriever(new CnbSource(), new Client());
+		$factory = new CurrencyContainerFactory($storage, $retriever);
+		self::$container[IStorage::class] = $storage;
+		self::$container[$factory::class] = $factory;
 
         SimpleRouter::start();
 	}

@@ -7,6 +7,7 @@ namespace App\Service\Currency\Retriever\DataSource;
 
 use App\Service\Currency\Currency;
 use App\Service\Currency\CurrencyContainer;
+use DateTime;
 use DateTimeImmutable;
 use GuzzleHttp\Psr7\Request;
 use League\Csv\Reader;
@@ -28,7 +29,8 @@ class CnbSource implements ICurrencySource
 		$csv->setHeaderOffset(1);
 		$iterator = $csv->getIterator();
 
-		$date = \DateTime::createFromImmutable($dateTime);
+		$firstLine= array_values($csv->fetchOne())[0];
+		$date = new DateTime(explode(' ', $firstLine)[0]);
 		$container = new CurrencyContainer();
 		$isDirty = false;
 		foreach ($iterator as $item) {
@@ -52,7 +54,7 @@ class CnbSource implements ICurrencySource
 
 	public function prepareRequest(DateTimeImmutable $dateTime): Request
 	{
-		$uri = sprintf("%s?date=%s", self::API_ENDPOINT, $dateTime->format('Y-m-d'));
+		$uri = sprintf("%s?date=%s", self::API_ENDPOINT, $dateTime->format('d.m.Y'));
 
 		return new Request('GET', $uri);
 	}

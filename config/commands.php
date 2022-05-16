@@ -4,6 +4,7 @@ use App\Command\CurrencyCommand;
 use App\Command\CurrencyHistoryCommand;
 use App\Command\HelpCommand;
 use App\Command\NameCommand;
+use App\Command\RecommendCurrencyCommand;
 use App\Command\TimeCommand;
 use App\Command\TimeZoneCommand;
 
@@ -14,4 +15,5 @@ return [
 	NameCommand::class,
 	CurrencyHistoryCommand::class,
 	HelpCommand::class,
+	RecommendCurrencyCommand::class,
 ];

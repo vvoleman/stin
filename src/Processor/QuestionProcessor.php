@@ -30,6 +30,8 @@ class QuestionProcessor
         // Loads question into better format
         $this->processCommands();
 
+		var_dump($this->innerCommands);
+
         // Finds command as array|null
         $command = $this->findCommand($question);
 
