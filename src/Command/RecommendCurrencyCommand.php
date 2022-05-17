@@ -37,11 +37,10 @@ class RecommendCurrencyCommand extends Command
 	{
 		$today = $this->getDateTime();
 		try {
-			$currencies = RecommendCurrencyHelper::getLastRecords($this->storage, $this->currency, $today);
+			$currencies = RecommendCurrencyHelper::getLastRecords($this->storage, $this->currency, $today, 3);
 		} catch (StorageException) {
 			return new SimpleResponse('Z technických důvodů nemohu odpovědět na tuto otázku', IResponse::HTTP_SERVER_ERROR);
 		}
-
 
 		if (count($currencies) == 0) {
 			return new SimpleResponse('Nenašel jsem žádná data pro měnu '.$this->currency, IResponse::HTTP_NOT_FOUND);
@@ -54,9 +53,7 @@ class RecommendCurrencyCommand extends Command
 
 		$result = $this->getRendered($avg, $growth, $currencies, $currencies[0]);
 
-		dump($result);
-
-		return new SimpleResponse('');
+		return new SimpleResponse($result);
 	}
 
 	protected function getRendered(float $avg, int $growth, array $currencies, Currency $currency): string

@@ -13,12 +13,14 @@ class MockStorage implements IStorage
 {
 
 	private array $records;
+	private bool $throwException;
 
 	/**
 	 * @param array<string, CurrencyContainer> $records
 	 */
-	public function __construct(array $records) {
+	public function __construct(array $records, bool $throwException = false) {
 		$this->setRecords($records);
+		$this->throwException = $throwException;
 	}
 
 
@@ -27,6 +29,8 @@ class MockStorage implements IStorage
 	 */
 	public function get(DateTimeImmutable $dateTime): ?CurrencyContainer
 	{
+		if($this->throwException) throw new StorageException('f');
+
 		$stamp = $dateTime->format('Y-m-d');
 		if (array_key_exists($stamp, $this->records)){
 			return $this->records[$stamp];
@@ -40,6 +44,8 @@ class MockStorage implements IStorage
 	 */
 	public function put(DateTimeImmutable $dateTime, CurrencyContainer $container): void
 	{
+		if($this->throwException) throw new StorageException('f');
+
 		$stamp = $dateTime->format('Y-m-d');
 		$this->records[$stamp] = $container;
 	}
@@ -49,6 +55,7 @@ class MockStorage implements IStorage
 	 */
 	public function listAll(): array
 	{
+		if($this->throwException) throw new StorageException('f');
 		$keys = array_keys($this->records);
 
 		return array_map(function(string $key){

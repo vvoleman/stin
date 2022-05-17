@@ -21,6 +21,7 @@ class HelpCommandTest extends TestCase
 	 * @covers \App\Command\TimeCommand
 	 * @covers \App\Command\TimeZoneCommand
 	 * @covers \App\Response\Command\SimpleResponse
+	 * @covers \App\Command\RecommendCurrencyCommand
 	 */
 	public function testRun()
 	{
@@ -39,6 +40,7 @@ class HelpCommandTest extends TestCase
 	 * @covers \App\Command\TimeCommand
 	 * @covers \App\Command\TimeZoneCommand
 	 * @covers \App\Response\Command\SimpleResponse
+	 * @covers \App\Command\RecommendCurrencyCommand
 	 */
 	public function testGetRendered(){
 		$command = new HelpCommand();

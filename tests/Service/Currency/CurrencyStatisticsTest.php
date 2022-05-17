@@ -12,6 +12,10 @@ class CurrencyStatisticsTest extends TestCase
 
 	private CurrencyStatistics $statistics;
 
+	/**
+	 * @covers \App\Service\Currency\CurrencyStatistics
+	 * @covers \App\Service\Currency\Currency
+	 */
 	public function testAverageNotCurrency()
 	{
 		$array = [1, 2, 3];
@@ -26,6 +30,8 @@ class CurrencyStatisticsTest extends TestCase
 	 * @param Currency[] $currencies
 	 * @param float $expected
 	 * @dataProvider provideAverage
+	 * @covers \App\Service\Currency\CurrencyStatistics
+	 * @covers \App\Service\Currency\Currency
 	 */
 	public function testAverage(array $currencies, float $expected): void
 	{
@@ -55,6 +61,8 @@ class CurrencyStatisticsTest extends TestCase
 	 * @param float $threshold
 	 * @param int $expected
 	 * @dataProvider provideGrowthComparedToThreshold
+	 * @covers \App\Service\Currency\CurrencyStatistics
+	 * @covers \App\Service\Currency\Currency
 	 */
 	public function testGrowthComparedToThreshold(array $currencies, float $threshold, int $expected)
 	{

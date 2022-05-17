@@ -21,12 +21,13 @@ class RecommendCurrencyHelper
 		// Get last $offset days
 		$dates = [];
 		$format = 'Y-m-d';
+		$stepCounter = 0;
+		$daysCounter = 0;
 		do{
-			$i = count($dates);
 
-			$minus = $today->modify(sprintf('-%d days', $i));
+			$minus = $today->modify(sprintf('-%d days', $daysCounter));
 			$weekDay = $minus->format('w');
-
+			$daysCounter++;
 			// Ignore weekends
 			if($weekDay == 6 || $weekDay == 0) {
 				continue;
@@ -34,11 +35,12 @@ class RecommendCurrencyHelper
 
 			// Loop all dates
 			foreach ($all as $date) {
-				if ($minus === $date->format($format)) {
+				if ($minus->format($format) === $date->format($format)) {
 					$dates[] = $date;
 				}
 			}
-		}while($i !== $offset);
+			$stepCounter++;
+		}while($stepCounter !== $offset);
 
 //		if (count($dates) !== $offset) {
 //			throw new CommandException('There are not enough records')
@@ -49,10 +51,10 @@ class RecommendCurrencyHelper
 		foreach ($dates as $date) {
 			$container = $storage->get($date);
 
-			$currency = $container->get($currency);
+			$currencyObject = $container->get($currency);
 
-			if ($currency) {
-				$currencies[] = $currency;
+			if ($currencyObject) {
+				$currencies[] = $currencyObject;
 			}
 		}
 
