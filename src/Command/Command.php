@@ -70,7 +70,7 @@ abstract class Command
 
     private static function replaceMandatoryParts(string $s): string
     {
-        $rule = "/\[([a-žA-Ž0-9 _]+)+\]/i";
+        $rule = "/\[([a-žA-Ž0-9 _]*?)]/i";
         $parts = [];
         if (preg_match_all($rule, $s, $attr)) {
             foreach ($attr[0] as $var) {

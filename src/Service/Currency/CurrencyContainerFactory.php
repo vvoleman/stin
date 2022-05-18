@@ -83,7 +83,9 @@ class CurrencyContainerFactory
 
 		// So we got our container, let's save it
 		try {
-			$this->storage->put($adjusted, $container);
+			dump($container);
+			$retrievedDate = new \DateTimeImmutable($container->toArray()[0]['dateTime']);
+			$this->storage->put($retrievedDate, $container);
 		} catch (StorageException) {
 			// TODO: Log
 		}
