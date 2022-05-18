@@ -75,7 +75,7 @@ class CnbSourceTest extends TestCase
 		$cnb = new CnbSource();
 		$request = $cnb->prepareRequest($dateTime);
 
-		$uri = sprintf('%s?date=%s',$cnb::API_ENDPOINT, $dateTime->format('Y-m-d'));
+		$uri = sprintf('%s?date=%s',$cnb::API_ENDPOINT, $dateTime->format('d.m.Y'));
 		$this->assertEquals($uri, (string) $request->getUri());
 	}
 

@@ -1,4 +1,5 @@
-<?php declare(strict_types = 1);
+<?php
+declare(strict_types=1);
 
 namespace App\Command;
 
@@ -18,7 +19,8 @@ class CurrencyCommand extends Command
 
 	private string $currency;
 
-	public function __construct(string $currency) {
+	public function __construct(string $currency)
+	{
 		$this->currency = $currency;
 	}
 
@@ -32,17 +34,23 @@ class CurrencyCommand extends Command
 		try {
 			$container = $factory->get();
 		} catch (CurrencyContainerException | InvalidDatetimeException) {
-			return new SimpleResponse('V tuto chvíli nemohu tento příkaz zpracovat',IResponse::HTTP_SERVER_ERROR);
+			return new SimpleResponse('V tuto chvíli nemohu tento příkaz zpracovat', IResponse::HTTP_SERVER_ERROR);
 		}
 
 		$currency = $container->get($this->currency);
 
 		if ($currency) {
-			return new SimpleResponse(sprintf('Kurz pro %s je %.2f Kč',$currency->getName(),$currency->getExchangeRate()));
+			return new SimpleResponse(
+				sprintf(
+					'Kurz pro %s je %.2f Kč (%s)',
+					$currency->getName(),
+					$currency->getExchangeRate(),
+					$currency->getDateTime()->format('d.m.Y')
+				)
+			);
 		} else {
-			return new SimpleResponse(sprintf('Nenalezl jsem měnu %s.',$this->currency),IResponse::HTTP_NOT_FOUND);
+			return new SimpleResponse(sprintf('Nenalezl jsem měnu %s.', $this->currency), IResponse::HTTP_NOT_FOUND);
 		}
-
 	}
 
 	public static function getHelp(): array

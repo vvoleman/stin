@@ -54,6 +54,7 @@ class QuestionProcessorTest extends TestCase
 	 * @covers \App\Service\Currency\Retriever\Client
 	 * @covers \App\Service\Currency\Retriever\DataSource\CnbSource
 	 * @covers \App\Service\Currency\Storage\FileStorage
+	 * @covers \App\Command\RecommendCurrencyCommand
      */
     public function testRun(string $question, bool $pass): void
     {
