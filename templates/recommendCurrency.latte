@@ -11,7 +11,8 @@
         <li>Průměr: {$avg|round:2} Kč</li>
         {foreach $currencies as $curr}
             {varType App\Service\Currency\Currency $curr}
-            <li>{$curr->getDateTime()->format('d.m.Y')}: <small>{$curr->getExchangeRate()} Kč (-{abs(($avg / $curr->getExchangeRate() - 1)*100)|round:2}%)</small></li>
+            {var $perc = -($avg / $curr->getExchangeRate() - 1)*100}
+            <li>{$curr->getDateTime()->format('d.m.Y')}: <small>{$curr->getExchangeRate()} Kč ({if $perc > 0}+{/if}{$perc|round:2}%)</small></li>
         {/foreach}
     </div>
 {else}
