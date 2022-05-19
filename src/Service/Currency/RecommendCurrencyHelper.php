@@ -18,8 +18,8 @@ class RecommendCurrencyHelper
 		$all = $storage->listAll();
 		$today = $dateTime;
 
-		if(!self::isDateIn($today, $all)) {
-			$today = $
+		if(count($all) > 1 && !self::isDateIn($today, $all)) {
+			$today = $all[count($all)-1];
 		}
 
 		// Get last $offset days

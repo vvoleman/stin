@@ -8,10 +8,10 @@
 {if $growth <= 0}
     <h5 n:if="count($currencies) < 3"> - data nevycházejí ze 3 předchozích dní, ale {count($currencies)}</h5>
     <div>
-        <li>Průměr: {$avg}</li>
+        <li>Průměr: {$avg|round:2} Kč</li>
         {foreach $currencies as $curr}
             {varType App\Service\Currency\Currency $curr}
-            <li>{$curr->getDateTime()->format('d.m.Y')}: {$curr->getExchangeRate()} Kč (-{abs(($avg / $currency->getExchangeRate() - 1)*100)|round:2}%)</li>
+            <li>{$curr->getDateTime()->format('d.m.Y')}: <small>{$curr->getExchangeRate()} Kč (-{abs(($avg / $curr->getExchangeRate() - 1)*100)|round:2}%)</small></li>
         {/foreach}
     </div>
 {else}
