@@ -18,13 +18,16 @@ class RecommendCurrencyHelper
 		$all = $storage->listAll();
 		$today = $dateTime;
 
+		if(count($all) > 1 && !self::isDateIn($today, $all)) {
+			$today = $all[count($all)-1];
+		}
+
 		// Get last $offset days
 		$dates = [];
 		$format = 'Y-m-d';
 		$stepCounter = 0;
 		$daysCounter = 0;
 		do{
-
 			$minus = $today->modify(sprintf('-%d days', $daysCounter));
 			$weekDay = $minus->format('w');
 			$daysCounter++;
@@ -59,6 +62,19 @@ class RecommendCurrencyHelper
 		}
 
 		return $currencies;
+	}
+
+	private static function isDateIn(\DateTimeImmutable $date, array $container): bool
+	{
+		$string = $date->format('Y-m-d');
+
+		foreach ($container as $item) {
+			if($item->format('Y-m-d') === $string){
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 }
