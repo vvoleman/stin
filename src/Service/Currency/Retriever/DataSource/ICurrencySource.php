@@ -10,7 +10,7 @@ use Psr\Http\Message\ResponseInterface;
 interface ICurrencySource
 {
 
-	public function responseToContainer(ResponseInterface $response): CurrencyContainer;
+	public function responseToContainer(ResponseInterface $response, DateTimeImmutable $dateTime): CurrencyContainer;
 
 	public function prepareRequest(DateTimeImmutable $dateTime): Request;
 

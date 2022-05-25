@@ -24,6 +24,7 @@
             <directory suffix=".php">src</directory>
         </include>
         <exclude>
+            <file suffix=".php">src/Bootstrap.php</file>
             <directory suffix=".php">src/Exception</directory>
         </exclude>
     </coverage>

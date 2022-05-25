@@ -11,7 +11,7 @@ use Psr\Http\Message\ResponseInterface;
 class FakeSource implements ICurrencySource
 {
 
-	public function responseToContainer(ResponseInterface $response): CurrencyContainer
+	public function responseToContainer(ResponseInterface $response, DateTimeImmutable $dateTimeImmutable): CurrencyContainer
 	{
 		return new CurrencyContainer();
 	}

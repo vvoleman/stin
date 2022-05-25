@@ -34,7 +34,7 @@ class ApiRetriever implements IRetriever
 			throw new RetrieverException($e->getMessage());
 		}
 
-		return $this->source->responseToContainer($response);
+		return $this->source->responseToContainer($response, $dateTime);
 	}
 
 	public function adjustDateTime(DateTimeImmutable $dateTime): DateTimeImmutable

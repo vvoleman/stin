@@ -5,10 +5,13 @@ namespace App\Tests\Service\Currency;
 use App\Exception\Currency\CurrencyContainerException;
 use App\Exception\Currency\StorageException;
 use App\Exception\InvalidDatetimeException;
+use App\Service\Currency\Currency;
+use App\Service\Currency\CurrencyContainer;
 use App\Service\Currency\CurrencyContainerFactory;
 use App\Service\Currency\Retriever\IRetriever;
 use App\Service\Currency\Storage\IStorage;
 use App\Tests\Mock\Currency\Retriever\Retriever;
+use App\Tests\Mock\Currency\Storage\MockStorage;
 use App\Tests\Mock\Currency\Storage\Storage;
 use Exception;
 use PHPUnit\Framework\TestCase;
@@ -78,12 +81,14 @@ class CurrencyContainerFactoryTest extends TestCase
 	public function containerInStorageProvider(): \Iterator
 	{
 		$retriever = $this->getRetriever();
-		$storage = $this->getStorage();
+		$container = new CurrencyContainer();
+		$container->add(new Currency('EUR','eur', 1, 1, new \DateTime()));
+		$storage = new MockStorage([
+			'2022-05-01' => $container
+		]);
 
 		yield [new CurrencyContainerFactory($storage, $retriever), '2022-05-01'];
 
-		$storage->setThrowException(StorageException::class);
-		yield [new CurrencyContainerFactory($storage, $retriever), '2022-05-01'];
 	}
 
 	/**
